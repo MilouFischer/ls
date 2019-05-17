@@ -6,7 +6,7 @@
 #    By: efischer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/14 15:49:28 by efischer          #+#    #+#              #
-#    Updated: 2019/05/15 17:41:56 by efischer         ###   ########.fr        #
+#    Updated: 2019/05/17 13:47:02 by efischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,9 @@ CC = gcc
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
+DFLAGS += $(CFLAGS)
+DFLAGS += -fsanitize=address,undefined
+DFLAGS += -g3
 COMPILE = $(CC) -c
 
 #=====================================SRCS======================================
@@ -49,7 +52,7 @@ vpath %.h $(PATHI)
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(PATHO) $(OBJS) $(HEAD)
-	$(CC) $(OBJS) $(LIBFT) -o $@
+	$(CC) $(OBJS) $(CFLAGS) $(LIBFT) -o $@
 
 $(OBJS): $(PATHO)%.o: %.c
 	$(COMPILE) $(CFLAGS) $< $(IFLAGS) $(INCLUDES) -o $@

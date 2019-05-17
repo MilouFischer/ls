@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 16:57:47 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/15 18:07:55 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/17 14:14:44 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ typedef struct		s_file
 
 typedef	struct		s_dir
 {
-	const char		*name;
-	const char		*type;
-	const char		*mode;
-	const char		*uid;
-	const char		*gid;
-	const char		*time;
-	long int		link;
 	long long int	size;
+	char			*name;
+	char			*mode;
+	char			*uid;
+	char			*gid;
+	long int		link;
+	char			time[13];
+	char			type;
 }					t_dir;
 
 #endif
