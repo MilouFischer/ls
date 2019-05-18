@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/15 17:48:47 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:17:01 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,32 @@
 # include <pwd.h>
 # include <grp.h>
 # include <time.h>
-# include "../libft/includes/libft.h"
+# include "libft.h"
+
+typedef	struct		s_dir
+{
+	long long int	size;
+	char			*name;
+	char			*mode;
+	char			*uid;
+	char			*gid;
+	long int		link;
+	char			time[13];
+	char			type;
+}					t_dir;
+
+typedef struct	s_padding
+{
+	size_t		size;
+	size_t		name;
+	size_t		uid;
+	size_t		gid;
+	size_t		link;
+	size_t		type;
+}				t_padding;
 
 int		main(int ac, char **av);
-void	ft_get_dir_info(char *path, char *name, t_dir *dir_info);
+void	ft_get_dir_info(char *path, char *name, t_dir *dir_info, t_padding *padding);
+void	ft_merge_sort(t_list **lst);
 
 #endif

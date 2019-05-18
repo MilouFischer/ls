@@ -6,11 +6,20 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/15 17:11:28 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/17 14:51:49 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:16:45 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+static void		ft_get_padding(char *str, size_t *data)
+{
+	size_t	len;
+
+	len = ft_strlen(str);
+	if (*data == 0 || len > *data - 1)
+		*data = len + 1;
+}
 
 static void		ft_get_time(const char *brut_tm, t_dir *dir_info)
 {
@@ -32,6 +41,7 @@ static void		ft_get_time(const char *brut_tm, t_dir *dir_info)
 	while (i < 12)
 		dir_info->time[i++] = tab[3][j++];
 	dir_info->time[i] = '\0';
+	ft_free_tab(tab);
 }
 
 
@@ -60,7 +70,7 @@ static void		ft_get_type(int nb_mode, t_dir *dir_info)
 		dir_info->type = ' ';
 }
 
-void		ft_get_dir_info(char *path, char *name, t_dir *dir_info)
+void		ft_get_dir_info(char *path, char *name, t_dir *dir_info, t_padding *padding)
 {
 	struct stat		buf;
 	struct passwd	usr;
@@ -72,13 +82,13 @@ void		ft_get_dir_info(char *path, char *name, t_dir *dir_info)
 	{
 		usr = *getpwuid(buf.st_uid);
 		grp = *getgrgid(buf.st_gid);
-		dir_info->name = ft_strdup(name);
+		ft_get_padding((dir_info->name = ft_strdup(name)), &padding->name);
 		ft_get_type(buf.st_mode, dir_info);
 		ft_get_mode(buf.st_mode, dir_info);
-		dir_info->link = buf.st_nlink;
-		dir_info->uid = ft_strdup(usr.pw_name);
-		dir_info->gid = ft_strdup(grp.gr_name);
-		dir_info->size = buf.st_size;
+		ft_get_padding(ft_itoa((dir_info->link = buf.st_nlink)), &padding->link);
+		ft_get_padding((dir_info->uid = ft_strdup(usr.pw_name)), &padding->uid);
+		ft_get_padding((dir_info->gid = ft_strdup(grp.gr_name)), &padding->gid);
+		ft_get_padding(ft_itoa(dir_info->size = buf.st_size), &padding->size);
 		ft_get_time(ctime(&buf.st_ctime), dir_info);
 	}
 	else

@@ -6,7 +6,7 @@
 #    By: efischer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/14 15:49:28 by efischer          #+#    #+#              #
-#    Updated: 2019/05/17 13:47:02 by efischer         ###   ########.fr        #
+#    Updated: 2019/05/18 17:46:19 by efischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,10 @@ NAME = ft_ls
 
 #=====================================HEAD======================================
 
-INCLUDES += includes/
-HEAD += ft_ls.h 
 IFLAGS += -I
+INCLUDES += includes/
+LIBINCLUDES += libft/includes/
+HEAD += ft_ls.h 
 
 #=====================================PATH======================================
 
@@ -39,6 +40,7 @@ COMPILE = $(CC) -c
 
 SRCS += ft_ls.c
 SRCS += ft_get_dir_info.c
+SRCS += ft_merge_sort.c
 
 #=====================================OBJS======================================
 
@@ -49,13 +51,15 @@ LIBFT = $(PATHLIB)libft.a
 vpath %.c srcs/
 vpath %.h $(PATHI)
 
+vpath %$(INCLUDES) $(IFLAGS)
+
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(PATHO) $(OBJS) $(HEAD)
 	$(CC) $(OBJS) $(CFLAGS) $(LIBFT) -o $@
 
 $(OBJS): $(PATHO)%.o: %.c
-	$(COMPILE) $(CFLAGS) $< $(IFLAGS) $(INCLUDES) -o $@
+	$(COMPILE) $(CFLAGS) $< $(IFLAGS) $(INCLUDES) $(IFLAGS) $(LIBINCLUDES) -o $@
 
 $(LIBFT):
 	make -C $(PATHLIB)

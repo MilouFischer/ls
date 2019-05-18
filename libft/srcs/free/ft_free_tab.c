@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/13 16:57:47 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/18 17:12:46 by efischer         ###   ########.fr       */
+/*   Created: 2019/01/11 15:52:45 by efischer          #+#    #+#             */
+/*   Updated: 2019/01/11 17:14:13 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#include "libft.h"
 
-typedef struct		s_list
+void	ft_free_tab(char **tmp)
 {
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
-}					t_list;
+	int		i;
 
-typedef struct		s_file
-{
-	char			*rest;
-	char			*cur;
-	int				fd;
-}					t_file;
-
-#endif
+	i = 0;
+	if (!tmp || !*tmp)
+		return ;
+	while (tmp[i])
+	{
+		free(tmp[i]);
+		tmp[i++] = NULL;
+	}
+	free(tmp);
+	tmp = NULL;
+}

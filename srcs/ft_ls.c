@@ -6,23 +6,24 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:25:57 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/17 14:51:48 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:17:23 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		ft_print_dir_info(t_dir *dir)
+static void		ft_print_dir_info(t_dir *dir, t_padding *padding)
 {
-	ft_printf("%c%s %d %s %s %d %s %s\n", dir->type, dir->mode, dir->link,
-	dir->uid, dir->gid, dir->size, dir->time, dir->name);
+	ft_printf("%c%s %*d %*s %*s %*d %s %-*s\n", dir->type, dir->mode,
+	padding->link, dir->link, padding->uid, dir->uid, padding->gid, dir->gid,
+	padding->size, dir->size, dir->time, padding->name, dir->name);
 }
 
-static void		ft_printlist(t_list *lst)
+static void		ft_printlist(t_list *lst, t_padding *padding)
 {
 	while (lst != NULL && lst->content != NULL)
 	{
-		ft_print_dir_info(((t_dir*)(lst->content)));
+		ft_print_dir_info(((t_dir*)(lst->content)), padding);
 		lst = lst->next;
 	}
 }
@@ -32,20 +33,23 @@ static void		ft_open_dir(char *path)
 	void			*dir;
 	struct dirent	*dirent;
 	t_dir			dir_info;
+	t_padding		padding;
 	t_list			*lst;
 	char			*tmp;
 
-	dir = opendir(path);
 	lst = NULL;
+	dir = opendir(path);
+	ft_bzero(&padding, sizeof(padding));
 	if (dir == NULL)
 		return ;
 	while ((dirent = readdir(dir)) != NULL)
 	{
 		ft_bzero(&dir_info, sizeof(dir_info));
-		ft_get_dir_info(path, dirent->d_name, &dir_info);
+		ft_get_dir_info(path, dirent->d_name, &dir_info, &padding);
 		ft_lstadd(&lst, ft_lstnew(&dir_info, sizeof(t_dir)));
 	}
-	ft_printlist(lst);
+	ft_merge_sort(&lst);
+	ft_printlist(lst, &padding);
 	while (lst != NULL)
 	{
 		if (((t_dir*)(lst->content))->type == 'd' && ft_strequ(((t_dir*)(lst->content))->name, ".") == 0

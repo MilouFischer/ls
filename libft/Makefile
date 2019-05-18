@@ -6,7 +6,7 @@
 #    By: efischer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 17:59:56 by efischer          #+#    #+#              #
-#    Updated: 2019/05/17 13:48:44 by efischer         ###   ########.fr        #
+#    Updated: 2019/05/18 17:56:32 by efischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -150,6 +150,10 @@ SRCS += ft_memjoin.c
 SRCS += ft_memmove.c
 SRCS += ft_memset.c
 
+#/////////////////////////////////////FREE//////////////////////////////////////
+
+SRCS += ft_free_tab.c
+
 #///////////////////////////////////FT_PRINTF///////////////////////////////////
 
 SRCS += ft_printf.c
@@ -182,6 +186,7 @@ vpath %.c srcs/nbr/
 vpath %.c srcs/print/
 vpath %.c srcs/memory/
 vpath %.c srcs/list/
+vpath %.c srcs/free/
 vpath %.h $(PATHI)
 
 all: $(NAME)
