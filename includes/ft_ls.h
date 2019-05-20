@@ -26,12 +26,12 @@
 
 typedef	struct		s_dir
 {
-	long long int	size;
+	char			*size;
 	char			*name;
 	char			*mode;
 	char			*uid;
 	char			*gid;
-	long int		link;
+	char			*link;
 	char			time[13];
 	char			type;
 }					t_dir;

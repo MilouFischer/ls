@@ -48,8 +48,10 @@ static void		ft_get_time(const char *brut_tm, t_dir *dir_info)
 static void		ft_get_mode(int nb_mode, t_dir *dir_info)
 {
 	static const char	*mode_tab[] = { "---", "--x", "-w-", "-wx", "r--", "r-x", "rw-", "rwx"};
+	char				*tmp;
 
-	nb_mode = ft_atoi(ft_itoa_base(nb_mode, 8));
+	nb_mode = ft_atoi((tmp = ft_itoa_base(nb_mode, 8)));
+	ft_strdel(&tmp);
 	dir_info->mode = ft_asprintf("%s%s%s", mode_tab[nb_mode / 100 % 10],
 	mode_tab[nb_mode / 10 % 10], mode_tab[nb_mode % 10]);
 }
@@ -57,8 +59,10 @@ static void		ft_get_mode(int nb_mode, t_dir *dir_info)
 static void		ft_get_type(int nb_mode, t_dir *dir_info)
 {
 	int			octal_mode;
+	char		*tmp;
 
-	octal_mode = ft_atoi(ft_itoa_base(nb_mode, 8));
+	octal_mode = ft_atoi((tmp = ft_itoa_base(nb_mode, 8)));
+	ft_strdel(&tmp);
 	octal_mode /= 1000;
 	if (octal_mode == 40)
 		dir_info->type = 'd';
@@ -85,10 +89,10 @@ void		ft_get_dir_info(char *path, char *name, t_dir *dir_info, t_padding *paddin
 		ft_get_padding((dir_info->name = ft_strdup(name)), &padding->name);
 		ft_get_type(buf.st_mode, dir_info);
 		ft_get_mode(buf.st_mode, dir_info);
-		ft_get_padding(ft_itoa((dir_info->link = buf.st_nlink)), &padding->link);
+		ft_get_padding((dir_info->link = ft_itoa(buf.st_nlink)), &padding->link);
 		ft_get_padding((dir_info->uid = ft_strdup(usr.pw_name)), &padding->uid);
 		ft_get_padding((dir_info->gid = ft_strdup(grp.gr_name)), &padding->gid);
-		ft_get_padding(ft_itoa(dir_info->size = buf.st_size), &padding->size);
+		ft_get_padding((dir_info->size = ft_itoa(buf.st_size)), &padding->size);
 		ft_get_time(ctime(&buf.st_ctime), dir_info);
 	}
 	else
