@@ -29,7 +29,6 @@ static void		ft_free_lst(t_list **lst)
 	if (*lst == NULL)
 		return ;
 	ft_free_lst(&(*lst)->next);
-	ft_free_dir_info(((t_dir*)((*lst)->content)));
 	free((*lst)->content);
 	free(*lst);
 	*lst = NULL;
@@ -65,8 +64,10 @@ static void		ft_find_next_dir(char *path, t_list *lst)
 			tmp = ft_asprintf("%s%s", path, ((t_dir*)(lst->content))->name);
 			ft_printf("%s:\n", tmp);
 			ft_strdel(&tmp);
-			ft_open_dir((ft_asprintf("%s%s/", path, ((t_dir*)(lst->content))->name)));
+			ft_open_dir((ft_asprintf("%s%s/", path,
+			((t_dir*)(lst->content))->name)));
 		}
+		ft_free_dir_info(((t_dir*)(lst->content)));
 		lst = lst->next;
 	}
 }
@@ -95,24 +96,60 @@ static void		ft_open_dir(char *path)
 	ft_free_lst(&lst);
 }
 
+static int		ft_manage_args(char *arg, char **path)
+{
+	if (arg[0] == '-')
+		return (TRUE);
+	*path = ft_strdup(arg);	
+	if (*path == NULL)
+	{
+		ft_putendl("usage");
+		return (FALSE);
+	}
+	if (opendir(*path) == NULL)
+		return (errno);
+	return (TRUE);
+}
+
 int		main(int ac, char **av)
 {
 	char	*path;
+	char	*tmp;
+	t_list	*lst;
+	t_list	*head;
+	int		i;
 
-	if (ac == 1)
-		path = ft_strdup(".");
-	else
-		path = ft_strdup(av[1]);
-	if (opendir(path) == NULL)
+	i = 1;
+	path = NULL;
+	lst = NULL;
+	path = ft_strdup(".");
+	while (i < ac)
 	{
-		if (errno != ENOTDIR)
-			perror(ft_asprintf("ft_ls: file not found '%s'", path));
-		else
-			ft_putendl(path);
-		return (0);
+		ft_strdel(&path);
+		if ((errno = ft_manage_args(av[i++], &path)) != TRUE)
+		{
+			if (errno != ENOTDIR)
+			{
+				perror((tmp = ft_asprintf("ft_ls: file not found '%s'", path)));
+				ft_strdel(&tmp);
+			}
+			else
+				ft_putendl(path);
+		}
+		else if (path != NULL)
+		{
+			if (path[ft_strlen(path) - 1] != '/')
+				path = ft_join_free(path, "/", 1);
+			ft_lstadd(&lst, ft_lstnew(path, ft_strlen(path) + 1));
+		}
 	}
-	if (path[ft_strlen(path) - 1] != '/')
-		path = ft_join_free(path, "/", 1);
-	ft_open_dir(path);
+	head = lst;
+	while (lst != NULL)
+	{
+		ft_open_dir(ft_strdup(lst->content));
+		lst = lst->next;
+	}
+	ft_free_lst(&head);
+	ft_strdel(&path);
 	return (0);
 }

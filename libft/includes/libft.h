@@ -28,5 +28,7 @@
 # define BUFF_SIZE 32
 # define FILEL ((t_file *)(list->content))
 # define T_FILEL ((t_file *)(tmp->content))
+# define TRUE 1
+# define FALSE 0
 
 #endif
