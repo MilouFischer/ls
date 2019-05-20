@@ -58,7 +58,7 @@ static void		ft_open_dir(char *path)
 			ft_putchar('\n');
 			tmp = ft_asprintf("%s%s", path, ((t_dir*)(lst->content))->name);
 			ft_printf("%s:\n", tmp);
-			ft_open_dir(ft_asprintf("%s%s", path, ((t_dir*)(lst->content))->name));
+			ft_open_dir(ft_asprintf("%s%s/", path, ((t_dir*)(lst->content))->name));
 		}
 		lst = lst->next;
 	}
