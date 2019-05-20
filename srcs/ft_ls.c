@@ -40,8 +40,6 @@ static void		ft_open_dir(char *path)
 	lst = NULL;
 	dir = opendir(path);
 	ft_bzero(&padding, sizeof(padding));
-	if (dir == NULL)
-		return ;
 	while ((dirent = readdir(dir)) != NULL)
 	{
 		ft_bzero(&dir_info, sizeof(dir_info));
@@ -72,6 +70,14 @@ int		main(int ac, char **av)
 		path = ft_strdup(".");
 	else
 		path = ft_strdup(av[1]);
+	if (opendir(path) == NULL)
+	{
+		if (errno != ENOTDIR)
+			perror(ft_asprintf("ft_ls: file not found '%s'", path));
+		else
+			ft_putendl(path);
+		return (0);
+	}
 	if (path[ft_strlen(path) - 1] != '/')
 		path = ft_join_free(path, "/", 1);
 	ft_open_dir(path);

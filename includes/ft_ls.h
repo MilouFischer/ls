@@ -20,6 +20,8 @@
 # include <pwd.h>
 # include <grp.h>
 # include <time.h>
+# include <string.h>
+# include <errno.h>
 # include "libft.h"
 
 typedef	struct		s_dir
