@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/18 18:17:01 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/21 17:34:39 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,31 +23,30 @@
 # include <string.h>
 # include <errno.h>
 # include "libft.h"
+# include "struct.h"
+# include "sort.h"
+# include "util.h"
 
-typedef	struct		s_dir
-{
-	char			*size;
-	char			*name;
-	char			*mode;
-	char			*uid;
-	char			*gid;
-	char			*link;
-	char			time[13];
-	char			type;
-}					t_dir;
+# define SIX_MONTHS	15768000
+# define FLAG_L		0x01
+# define FLAG_A		0x02
+# define FLAG_REV	0x04
+# define FLAG_T		0x08
+# define FLAG_R		0x10
+# define OTH_X		0x001
+# define OTH_W		0x002
+# define OTH_R		0x004
+# define GRP_X		0x008
+# define GRP_W		0x010
+# define GRP_R		0x020
+# define USR_X		0x040
+# define USR_W		0x080
+# define USR_R		0x100
 
-typedef struct	s_padding
-{
-	size_t		size;
-	size_t		name;
-	size_t		uid;
-	size_t		gid;
-	size_t		link;
-	size_t		type;
-}				t_padding;
-
-int		main(int ac, char **av);
 void	ft_get_dir_info(char *path, char *name, t_dir *dir_info, t_padding *padding);
-void	ft_merge_sort(t_list **lst);
+void	ft_merge_sort(t_list **lst, void sort(t_list**, t_list**, t_list**));
+void	ft_sort_name(t_list **lst1, t_list **lst2, t_list **head);
+void	ft_sort_time(t_list **lst1, t_list **lst2, t_list **head);
+void	ft_sort_rev(t_list **lst1, t_list **lst2, t_list **head);
 
 #endif
