@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/21 17:34:39 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/22 13:23:27 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@
 # include <string.h>
 # include <errno.h>
 # include "libft.h"
-# include "struct.h"
-# include "sort.h"
-# include "util.h"
 
 # define SIX_MONTHS	15768000
 # define FLAG_L		0x01
@@ -43,10 +40,46 @@
 # define USR_W		0x080
 # define USR_R		0x100
 
-void	ft_get_dir_info(char *path, char *name, t_dir *dir_info, t_padding *padding);
-void	ft_merge_sort(t_list **lst, void sort(t_list**, t_list**, t_list**));
-void	ft_sort_name(t_list **lst1, t_list **lst2, t_list **head);
-void	ft_sort_time(t_list **lst1, t_list **lst2, t_list **head);
-void	ft_sort_rev(t_list **lst1, t_list **lst2, t_list **head);
+typedef	struct		s_dir
+{
+	char			*size;
+	char			*name;
+	char			mode[10];
+	char			*uid;
+	char			*gid;
+	char			*link;
+	char			time[13];
+	char			type;
+	unsigned long	brut_time;
+}					t_dir;
+
+typedef struct		s_padding
+{
+	size_t			size;
+	size_t			name;
+	size_t			uid;
+	size_t			gid;
+	size_t			link;
+	size_t			type;
+	size_t			total;
+}					t_padding;
+
+void				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
+					t_padding *padding);
+void				ft_directories(t_list *lst_dir, uint8_t flags);
+void				ft_open_dir(char *path, uint8_t flags);
+void				ft_merge_sort(t_list **lst, void sort(t_list**, t_list**,
+					t_list**));
+void				ft_sort_name(t_list **lst1, t_list **lst2, t_list **head);
+void				ft_sort_time(t_list **lst1, t_list **lst2, t_list **head);
+void				ft_sort_rev(t_list **lst1, t_list **lst2, t_list **head);
+void				ft_sort_name_av(t_list **lst1, t_list **lst2,
+					t_list **head);
+void				ft_free_dir_info(t_dir *dir_info);
+void				ft_free_lst(t_list **lst);
+void				ft_print_dir_info(t_dir *dir, t_padding *padding,
+					uint8_t flags);
+void				ft_printlist(t_list *lst, t_padding *padding,
+					uint8_t flags);
 
 #endif

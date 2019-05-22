@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:22 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/21 17:19:24 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/22 11:28:07 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void		ft_get_padding(char *str, size_t *data)
 	size_t	len;
 
 	len = ft_strlen(str);
-	if (*data == 0 || len > *data)
-		*data = len;
+	if (*data == 0 || len > *data - 1)
+		*data = len + 1;
 }
 
 static void		ft_get_time(const char *brut_tm, t_dir *dir_info)
@@ -56,7 +56,6 @@ static void		ft_get_time(const char *brut_tm, t_dir *dir_info)
 	ft_free_tab(tab);
 }
 
-
 static void		ft_get_mode(int nb_mode, t_dir *dir_info)
 {
 	ft_memset(dir_info->mode, '-', 10);
@@ -86,7 +85,8 @@ static void		ft_get_type(int nb_mode, t_dir *dir_info)
 	int			octal_mode;
 	char		*tmp;
 
-	octal_mode = ft_atoi((tmp = ft_itoa_base(nb_mode, 8)));
+	tmp = ft_itoa_base(nb_mode, 8);
+	octal_mode = ft_atoi(tmp);
 	ft_strdel(&tmp);
 	octal_mode /= 1000;
 	if (octal_mode == 40)
@@ -99,8 +99,8 @@ static void		ft_get_type(int nb_mode, t_dir *dir_info)
 		dir_info->type = ' ';
 }
 
-void		ft_get_dir_info(char *path, char *name, t_dir *dir_info,
-			t_padding *padding)
+void			ft_get_dir_info(char *path, char *name, t_dir *dir_info,
+				t_padding *padding)
 {
 	struct stat		buf;
 	struct passwd	usr;
@@ -113,10 +113,12 @@ void		ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 		ft_get_padding((dir_info->name = ft_strdup(name)), &padding->name);
 		ft_get_type(buf.st_mode, dir_info);
 		ft_get_mode(buf.st_mode, dir_info);
-		ft_get_padding((dir_info->link = ft_itoa(buf.st_nlink)), &padding->link);
+		ft_get_padding((dir_info->link = ft_itoa(buf.st_nlink)),
+		&padding->link);
 		ft_get_padding((dir_info->uid = ft_strdup(usr.pw_name)), &padding->uid);
 		ft_get_padding((dir_info->gid = ft_strdup(grp.gr_name)), &padding->gid);
 		ft_get_padding((dir_info->size = ft_itoa(buf.st_size)), &padding->size);
+		padding->total += buf.st_blocks;
 		dir_info->brut_time = buf.st_mtime;
 		ft_get_time(ctime(&buf.st_mtime), dir_info);
 	}

@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:33 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/21 17:19:35 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:14:56 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		ft_merge_sort(t_list **lst, void sort(t_list**, t_list**, t_list**))
 	t_list	*lst1;
 	t_list	*lst2;
 
-	if (lst == NULL || (*lst)->next == NULL)
+	if (*lst == NULL || (*lst)->next == NULL)
 		return ;
 	lst1 = *lst;
 	ft_split_lst(lst);

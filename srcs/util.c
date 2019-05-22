@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:56 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/21 17:22:53 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:14:54 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ void		ft_free_lst(t_list **lst)
 
 void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint8_t flags)
 {
-	if ((flags & FLAG_A) != FLAG_A && dir->name[0] == '.')
+	if ((flags & FLAG_A) != FLAG_A && dir->name[0] == '.'
+		&& ft_strchr(dir->name, '/') == NULL)
 		return ;
 	if ((flags & FLAG_L) == FLAG_L)
-		ft_printf("%c%s %*s %*s %*s %*s %s %-*s\n", dir->type, dir->mode,
-		padding->link, dir->link, padding->uid, dir->uid, padding->gid, dir->gid,
-		padding->size, dir->size, dir->time, padding->name, dir->name);
+		ft_printf("%c%s %*s %-*s %-*s%*s %s %-*s\n", dir->type, dir->mode,
+		padding->link, dir->link, padding->uid, dir->uid, padding->gid,
+		dir->gid, padding->size, dir->size, dir->time, padding->name,
+		dir->name);
 	else
 		ft_printf("%-*s", padding->name, dir->name);
 }
@@ -50,4 +52,6 @@ void		ft_printlist(t_list *lst, t_padding *padding, uint8_t flags)
 		ft_print_dir_info(((t_dir*)(lst->content)), padding, flags);
 		lst = lst->next;
 	}
+	if ((flags & FLAG_L) != FLAG_L)
+		ft_putchar('\n');
 }

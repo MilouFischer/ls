@@ -6,7 +6,7 @@
 #    By: efischer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/14 15:49:28 by efischer          #+#    #+#              #
-#    Updated: 2019/05/21 17:31:59 by efischer         ###   ########.fr        #
+#    Updated: 2019/05/22 09:45:47 by efischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,6 @@ IFLAGS += -I
 INCLUDES += includes/
 LIBINCLUDES += libft/includes/
 HEAD += ft_ls.h
-HEAD += struct.h
-HEAD += sort.h
-HEAD += util.h
 
 #=====================================PATH======================================
 
@@ -42,11 +39,11 @@ COMPILE = $(CC) -c
 #=====================================SRCS======================================
 
 SRCS += ft_ls.c
+SRCS += directories.c
 SRCS += get_dir_info.c
 SRCS += merge_sort.c
 SRCS += sort.c
 SRCS += util.c
-SRCS += struct.c
 
 #=====================================OBJS======================================
 
