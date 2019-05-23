@@ -41,13 +41,16 @@
 # define USR_X		0x040
 # define USR_W		0x080
 # define USR_R		0x100
-# define TYPE_P		0x01
-# define TYPE_C		0x02
-# define TYPE_D		0x04
-# define TYPE_B		0x06
-# define TYPE_F		0x08
-# define TYPE_L		0x10
-# define TYPE_S		0x12
+# define STICKY_BIT	0x200
+# define SET_GID	0x400
+# define SET_UID	0x800
+# define TYPE_P		0x1
+# define TYPE_C		0x2
+# define TYPE_D		0x4
+# define TYPE_B		0x6
+# define TYPE_F		0x8
+# define TYPE_L		0xA
+# define TYPE_S		0xC
 
 typedef	struct		s_dir
 {

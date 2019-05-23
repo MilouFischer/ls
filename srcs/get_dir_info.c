@@ -56,24 +56,45 @@ static void		ft_get_time(const char *brut_tm, t_dir *dir_info)
 	ft_free_tab(tab);
 }
 
+static void		ft_get_mode_x(int nb_mode, t_dir *dir_info)
+{
+	if ((nb_mode & OTH_X) == OTH_X)
+		dir_info->mode[8] = 'x';
+	if ((nb_mode & OTH_X) == OTH_X && (nb_mode & STICKY_BIT) == STICKY_BIT)
+		dir_info->mode[8] = 't';
+	if ((nb_mode & OTH_X) != OTH_X && (nb_mode & STICKY_BIT) == STICKY_BIT)
+		dir_info->mode[8] = 'T';
+	if ((nb_mode & GRP_X) == GRP_X)
+		dir_info->mode[5] = 'x';
+	if ((nb_mode & GRP_X) == GRP_X && ((nb_mode & SET_UID) == SET_UID
+		|| (nb_mode & SET_GID) == SET_GID))
+		dir_info->mode[5] = 's';
+	if ((nb_mode & GRP_X) != GRP_X && ((nb_mode & SET_UID) == SET_UID
+		|| (nb_mode & SET_GID) == SET_GID))
+		dir_info->mode[5] = 'S';
+	if ((nb_mode & USR_X) == USR_X)
+		dir_info->mode[2] = 'x';
+	if ((nb_mode & USR_X) == USR_X && ((nb_mode & SET_UID) == SET_UID
+		|| (nb_mode & SET_GID) == SET_GID))
+		dir_info->mode[2] = 's';
+	if ((nb_mode & USR_X) != USR_X && ((nb_mode & SET_UID) == SET_UID
+		|| (nb_mode & SET_GID) == SET_GID))
+		dir_info->mode[2] = 'S';
+}
+
 static void		ft_get_mode(int nb_mode, t_dir *dir_info)
 {
 	ft_memset(dir_info->mode, '-', 10);
 	dir_info->mode[9] = '\0';
-	if ((nb_mode & OTH_X) == OTH_X)
-		dir_info->mode[8] = 'x';
+	ft_get_mode_x(nb_mode, dir_info);
 	if ((nb_mode & OTH_W) == OTH_W)
 		dir_info->mode[7] = 'w';
 	if ((nb_mode & OTH_R) == OTH_R)
 		dir_info->mode[6] = 'r';
-	if ((nb_mode & GRP_X) == GRP_X)
-		dir_info->mode[5] = 'x';
 	if ((nb_mode & GRP_W) == GRP_W)
 		dir_info->mode[4] = 'w';
 	if ((nb_mode & GRP_R) == GRP_R)
 		dir_info->mode[3] = 'r';
-	if ((nb_mode & USR_X) == USR_X)
-		dir_info->mode[2] = 'x';
 	if ((nb_mode & USR_W) == USR_W)
 		dir_info->mode[1] = 'w';
 	if ((nb_mode & USR_R) == USR_R)
