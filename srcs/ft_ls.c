@@ -40,44 +40,42 @@ static uint8_t	ft_manage_args(int *current_arg, int ac, char **av)
 	return (flags);
 }
 
-static void		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *dir,
-				size_t len)
+static void		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg)
 {
 	char	*tmp;
 
 	tmp = NULL;
-	if (opendir(dir) == NULL)
+	if (opendir(arg) == NULL)
 	{
 		if (errno == ENOTDIR)
-			ft_lstadd(lst_file, ft_lstnew(dir, len));
+			ft_lstadd(lst_file, ft_lstnew(arg, ft_strlen(arg) + 1));
 		else
 		{
-			perror((tmp = ft_asprintf("ft_ls: %s", dir)));
+			perror((tmp = ft_asprintf("ft_ls: %s", arg)));
 			ft_strdel(&tmp);
 		}
 	}
-	else if (dir != NULL)
+	else if (arg != NULL)
 	{
-		if (dir[len - 1] != '/')
+		if (arg[ft_strlen(arg) - 1] != '/')
 		{
-			tmp = ft_strjoin(dir, "/");
-			ft_lstadd(lst_dir, ft_lstnew(tmp, len));
+			tmp = ft_strjoin(arg, "/");
+			ft_lstadd(lst_dir, ft_lstnew(tmp, ft_strlen(tmp) + 1));
 			ft_strdel(&tmp);
 		}
 		else
-			ft_lstadd(lst_dir, ft_lstnew(dir, len));
+			ft_lstadd(lst_dir, ft_lstnew(arg, ft_strlen(arg) + 1));
 	}
-	write(1, (*lst_dir)->content, (*lst_dir)->content_size);
 }
 
-static void		ft_list_dir(t_list **lst_dir, t_list **lst_file, t_list *lst_av)
+static void		ft_list_dir(t_list **lst_dir, t_list **lst_file, char **tab)
 {
-	if (lst_av == NULL)
+	if (*tab == NULL)
 		ft_lstadd(lst_dir, ft_lstnew("./", 3));
-	while (lst_av != NULL)
+	while (*tab != NULL)
 	{
-		ft_check_dir(lst_dir, lst_file, lst_av->content, lst_av->content_size);
-		lst_av = lst_av->next;
+		ft_check_dir(lst_dir, lst_file, *tab);
+		tab++;
 	}
 }
 
@@ -106,34 +104,71 @@ static void		ft_files(t_list *lst_file, uint8_t flags)
 	ft_free_lst(&lst);
 }
 
-static void		ft_sort_av(t_list **lst_av, int ac, char **av)
+void	ft_bubble_sort(char	**tab)
 {
-	int		i;
+	size_t	i;
+	size_t	j;
+	char	*tmp;
 
 	i = 0;
-	while (i < ac)
+	while (tab[i] != NULL)
 	{
-		ft_lstadd(lst_av, ft_lstnew(av[i], ft_strlen(av[i]) + 1));
+		j = i;
+		while (tab[j] != NULL)
+		{
+			if (ft_strcmp(tab[i], tab[j]) > 0)
+			{
+				tmp = tab[i];
+				tab[i] = tab[j];
+				tab[j] = tmp;
+			}
+			j++;
+		}
 		i++;
 	}
-	ft_merge_sort(lst_av, ft_sort_name_av);
+}
+
+char	**ft_get_args_tab(int ac, char **av)
+{
+	int		i;
+	char	**tab;
+
+	i = 0;
+	if ((tab = (char**)malloc(sizeof(char*) * (ac + 1))) == NULL)
+		return (NULL);
+	while (i < ac)
+	{
+		tab[i] = av[i];
+		i++;
+	}
+	tab[i] = NULL;
+	return (tab);
+}
+
+static char		**ft_sort_av(int ac, char **av)
+{
+	char	**tab;
+
+	tab = ft_get_args_tab(ac - 1, av + 1);
+	ft_bubble_sort(tab);
+	return (tab);
 }
 
 int				main(int ac, char **av)
 {
-	t_list	*lst_av;
+	char	**tab;
 	t_list	*lst_dir;
 	t_list	*lst_file;
 	int		i;
 	uint8_t	flags;
 
 	i = 1;
-	lst_av = NULL;
 	lst_dir = NULL;
 	lst_file = NULL;
 	flags = ft_manage_args(&i, ac, av);
-	ft_sort_av(&lst_av, ac - i, av + i);
-	ft_list_dir(&lst_dir, &lst_file, lst_av);
+	tab = ft_sort_av(ac - i, av + i);
+	ft_print_tab(tab);
+	ft_list_dir(&lst_dir, &lst_file, tab);
 	if (lst_file != NULL)
 	{
 		ft_files(lst_file, flags);

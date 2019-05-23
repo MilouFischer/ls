@@ -24,6 +24,8 @@
 # include <errno.h>
 # include "libft.h"
 
+#include <stdint.h>
+
 # define SIX_MONTHS	15768000
 # define FLAG_L		0x01
 # define FLAG_A		0x02
