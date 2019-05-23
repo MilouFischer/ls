@@ -12,13 +12,17 @@
 
 #include "ft_ls.h"
 
-void		ft_free_dir_info(t_dir *dir_info)
+void		ft_free_dir_info(t_list *lst)
 {
-	ft_strdel(&dir_info->name);
-	ft_strdel(&dir_info->link);
-	ft_strdel(&dir_info->uid);
-	ft_strdel(&dir_info->gid);
-	ft_strdel(&dir_info->size);
+	while (lst != NULL)
+	{
+		ft_strdel(&((t_dir*)(lst->content))->name);
+		ft_strdel(&((t_dir*)(lst->content))->link);
+		ft_strdel(&((t_dir*)(lst->content))->uid);
+		ft_strdel(&((t_dir*)(lst->content))->gid);
+		ft_strdel(&((t_dir*)(lst->content))->size);
+		lst = lst->next;
+	}
 }
 
 void		ft_free_lst(t_list **lst)
@@ -37,10 +41,9 @@ void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint8_t flags)
 		&& ft_strchr(dir->name, '/') == NULL)
 		return ;
 	if ((flags & FLAG_L) == FLAG_L)
-		ft_printf("%c%s %*s %-*s %-*s%*s %s %-*s\n", dir->type, dir->mode,
+		ft_printf("%c%s %*s %-*s %-*s%*s %s %s\n", dir->type, dir->mode,
 		padding->link, dir->link, padding->uid, dir->uid, padding->gid,
-		dir->gid, padding->size, dir->size, dir->time, padding->name,
-		dir->name);
+		dir->gid, padding->size, dir->size, dir->time, dir->name);
 	else
 		ft_printf("%-*s", padding->name, dir->name);
 }

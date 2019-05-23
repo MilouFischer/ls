@@ -129,7 +129,7 @@ void			ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 	struct passwd	usr;
 	struct group	grp;
 
-	if ((stat(path, &buf)) != -1)
+	if ((lstat(path, &buf)) != -1)
 	{
 		usr = *getpwuid(buf.st_uid);
 		grp = *getgrgid(buf.st_gid);

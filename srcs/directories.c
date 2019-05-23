@@ -29,7 +29,7 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint8_t flags)
 			ft_open_dir((ft_asprintf("%s%s/", path,
 			((t_dir*)(lst->content))->name)), flags);
 		}
-		ft_free_dir_info(((t_dir*)(lst->content)));
+//		ft_free_dir_info(((t_dir*)(lst->content)));
 		lst = lst->next;
 	}
 }
@@ -71,6 +71,7 @@ void			ft_open_dir(char *path, uint8_t flags)
 	if ((flags & FLAG_R) == FLAG_R)
 		ft_find_next_dir(path, lst, flags);
 	ft_strdel(&path);
+	ft_free_dir_info(lst);
 	ft_free_lst(&lst);
 }
 
