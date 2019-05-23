@@ -82,19 +82,21 @@ static void		ft_get_mode(int nb_mode, t_dir *dir_info)
 
 static void		ft_get_type(int nb_mode, t_dir *dir_info)
 {
-	int			octal_mode;
-	char		*tmp;
-
-	tmp = ft_itoa_base(nb_mode, 8);
-	octal_mode = ft_atoi(tmp);
-	ft_strdel(&tmp);
-	octal_mode /= 1000;
-	if (octal_mode == 40)
-		dir_info->type = 'd';
-	else if (octal_mode == 100)
-		dir_info->type = '-';
-	else if (octal_mode == 120)
+	nb_mode >>= 12;
+	if ((nb_mode & TYPE_S) == TYPE_S)
+		dir_info->type = 's';
+	else if ((nb_mode & TYPE_L) == TYPE_L)
 		dir_info->type = 'l';
+	else if ((nb_mode & TYPE_F) == TYPE_F)
+		dir_info->type = '-';
+	else if ((nb_mode & TYPE_B) == TYPE_B)
+		dir_info->type = 'b';
+	else if ((nb_mode & TYPE_D) == TYPE_D)
+		dir_info->type = 'd';
+	else if ((nb_mode & TYPE_C) == TYPE_C)
+		dir_info->type = 'c';
+	else if ((nb_mode & TYPE_P) == TYPE_P)
+		dir_info->type = 'p';
 	else
 		dir_info->type = ' ';
 }
