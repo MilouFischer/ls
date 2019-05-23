@@ -166,8 +166,7 @@ int				main(int ac, char **av)
 	lst_dir = NULL;
 	lst_file = NULL;
 	flags = ft_manage_args(&i, ac, av);
-	tab = ft_sort_av(ac - i, av + i);
-	ft_print_tab(tab);
+	tab = ft_sort_av(ac, av);
 	ft_list_dir(&lst_dir, &lst_file, tab);
 	if (lst_file != NULL)
 	{
