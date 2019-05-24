@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:25:57 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 16:47:34 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 17:09:12 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int				main(int ac, char **av)
 	{
 		ft_files(lst_file, flags);
 		if (lst_dir != NULL && lst_dir->next == NULL)
-			ft_printf("\n%.*s:\n", ft_strlen(lst_dir->content) - 1, lst_dir->content);
+			ft_printf("\n%s:\n", lst_dir->content);
 		else if (lst_dir != NULL)
 			ft_putchar('\n');
 	}

@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:37:23 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 15:39:32 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 17:10:28 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,8 @@ void			ft_directories(t_list *lst_dir, uint8_t flags)
 	while (lst_dir != NULL)
 	{
 		if (lst_dir != head || lst_dir->next != NULL)
-			ft_printf("%.*s:\n", ft_strlen(lst_dir->content) - 1,
-			lst_dir->content);
-		ft_open_dir(ft_strdup(lst_dir->content), flags);
+			ft_printf("%s:\n", lst_dir->content);
+		ft_open_dir(ft_asprintf("%s/", lst_dir->content), flags);
 		if (lst_dir->next != NULL)
 			ft_putchar('\n');
 		lst_dir = lst_dir->next;

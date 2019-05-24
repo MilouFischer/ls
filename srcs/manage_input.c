@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:40:36 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 16:43:20 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 17:09:56 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ static int		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg)
 	}
 	else if (arg != NULL)
 	{
-		if (arg[ft_strlen(arg) - 1] != '/')
+		if (arg[ft_strlen(arg) - 1] == '/')
 		{
-			tmp = ft_strjoin(arg, "/");
+			tmp = ft_strndup(arg, ft_strlen(arg) - 2);
 			ft_lstadd(lst_dir, ft_lstnew(tmp, ft_strlen(tmp) + 1));
 			ft_strdel(&tmp);
 		}
@@ -50,11 +50,11 @@ static void		ft_list_dir(t_list **lst_dir, t_list **lst_file, char **tab)
 	i = 0;
 	error = 0;
 	if (tab[0] == NULL)
-		ft_lstadd(lst_dir, ft_lstnew("./", 3));
+		ft_lstadd(lst_dir, ft_lstnew(".", 2));
 	while (tab[i] != NULL)
 		error += ft_check_dir(lst_dir, lst_file, tab[i++]);
 	if (error >= 1 && *lst_dir != NULL && (*lst_dir)->next == NULL && *lst_file == NULL)
-		ft_printf("\n%.*s:\n", ft_strlen((*lst_dir)->content) - 1, (*lst_dir)->content);
+		ft_printf("\n%s:\n", (*lst_dir)->content);
 	else if (error >= 1 && *lst_dir != NULL && *lst_file == NULL)
 		ft_putchar('\n');
 }
