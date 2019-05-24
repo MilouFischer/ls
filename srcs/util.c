@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:56 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 16:09:57 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 18:04:22 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint8_t flags)
 
 void		ft_printlist(t_list *lst, t_padding *padding, uint8_t flags)
 {
+	if ((flags & FLAG_L) == FLAG_L && ((((t_dir*)(lst->content))->type) & TYPE_F) != TYPE_F)
+		ft_printf("total %d\n", padding->total);
 	while (lst != NULL && lst->content != NULL)
 	{
 		ft_print_dir_info(((t_dir*)(lst->content)), padding, flags);

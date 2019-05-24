@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:40:36 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 17:09:56 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 17:28:32 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg)
 	{
 		if (arg[ft_strlen(arg) - 1] == '/')
 		{
-			tmp = ft_strndup(arg, ft_strlen(arg) - 2);
+			tmp = ft_strndup(arg, ft_strlen(arg) - 1);
 			ft_lstadd(lst_dir, ft_lstnew(tmp, ft_strlen(tmp) + 1));
 			ft_strdel(&tmp);
 		}

@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:37:23 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 17:10:28 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 17:22:18 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ void			ft_open_dir(char *path, uint8_t flags)
 		}
 	}
 	ft_sort_dir(&lst, flags);
-	if ((flags & FLAG_L) == FLAG_L)
-		ft_printf("total %d\n", padding.total);
 	ft_printlist(lst, &padding, flags);
 	if ((flags & FLAG_R) == FLAG_R)
 		ft_find_next_dir(path, lst, flags);
