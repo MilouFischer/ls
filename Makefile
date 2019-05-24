@@ -6,7 +6,7 @@
 #    By: efischer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/14 15:49:28 by efischer          #+#    #+#              #
-#    Updated: 2019/05/24 12:43:00 by efischer         ###   ########.fr        #
+#    Updated: 2019/05/24 14:49:56 by efischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,8 @@ SRCS += get_dir_info.c
 SRCS += merge_sort.c
 SRCS += sort.c
 SRCS += util.c
+SRCS += flags.c
+SRCS += manage_input.c
 
 #=====================================OBJS======================================
 

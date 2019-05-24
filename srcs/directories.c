@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:37:23 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/22 13:17:07 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 14:30:20 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void			ft_directories(t_list *lst_dir, uint8_t flags)
 {
 	t_list	*head;
 
+	ft_sort(&lst_dir, flags);
 	head = lst_dir;
 	while (lst_dir != NULL)
 	{

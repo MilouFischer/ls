@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/22 13:23:27 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 14:59:11 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,14 @@ typedef struct		s_padding
 	size_t			total;
 }					t_padding;
 
+uint8_t				ft_manage_args(int *current_arg, int ac, char **av);
+void				ft_sort_av(int ac, char **av, t_list **lst_dir,
+					t_list **lst_file);
 void				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 					t_padding *padding);
 void				ft_directories(t_list *lst_dir, uint8_t flags);
 void				ft_open_dir(char *path, uint8_t flags);
+void				ft_sort(t_list **lst, uint8_t flags);
 void				ft_merge_sort(t_list **lst, void sort(t_list**, t_list**,
 					t_list**));
 void				ft_sort_name(t_list **lst1, t_list **lst2, t_list **head);

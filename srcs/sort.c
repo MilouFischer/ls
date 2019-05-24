@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:46 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/22 13:24:29 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 14:31:44 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,13 @@ void		ft_sort_name_av(t_list **lst1, t_list **lst2, t_list **head)
 		*head = *lst1;
 		*lst1 = (*lst1)->next;
 	}
+}
+
+void		ft_sort(t_list **lst, uint8_t flags)
+{
+	ft_merge_sort(lst, &ft_sort_name);
+	if ((flags & FLAG_T) == FLAG_T)
+		ft_merge_sort(lst, &ft_sort_time);
+	if ((flags & FLAG_REV) == FLAG_REV)
+		ft_merge_sort(lst, &ft_sort_rev);
 }
