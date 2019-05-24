@@ -6,7 +6,7 @@
 #    By: efischer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/14 15:49:28 by efischer          #+#    #+#              #
-#    Updated: 2019/05/22 09:45:47 by efischer         ###   ########.fr        #
+#    Updated: 2019/05/24 12:43:00 by efischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = ft_ls
 
 IFLAGS += -I
 INCLUDES += includes/
-LIBINCLUDES += libft/includes/
+LIBINCLUDES += $(PATHLIB)includes/
 HEAD += ft_ls.h
 
 #=====================================PATH======================================
@@ -27,7 +27,7 @@ PATHLIB += libft/
 
 #===================================COMPILE=====================================
 
-CC = gcc
+CC = clang
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
@@ -64,7 +64,7 @@ $(NAME): $(LIBFT) $(PATHO) $(OBJS) $(HEAD)
 $(OBJS): $(PATHO)%.o: %.c
 	$(COMPILE) $(CFLAGS) $< $(IFLAGS) $(INCLUDES) $(IFLAGS) $(LIBINCLUDES) -o $@
 
-$(LIBFT):
+$(LIBFT): FORCE
 	make -C $(PATHLIB)
 
 $(PATHO):
@@ -81,4 +81,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+FORCE:
+
+.PHONY: all clean fclean re FORCE

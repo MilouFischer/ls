@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:25:57 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/22 14:14:53 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 12:47:23 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,5 +178,5 @@ int				main(int ac, char **av)
 	ft_free_lst(&lst_file);
 	ft_free_lst(&lst_dir);
 	free(tab);
-	return (0);
+	return (EXIT_SUCCESS);
 }
