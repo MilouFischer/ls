@@ -1,5 +1,6 @@
 *.o
 a.out
+ft_ls
 main.c
 *.*.swp
 toto
