@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:35:48 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 14:50:39 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 15:06:12 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static void		ft_get_flags(char *arg, uint8_t *flags)
 			*flags |= FLAG_R;
 		else
 		{
-			ft_putendl("ft_ls: illegal option -- -\nusage: ft_ls [-Ralrt] [file ...]");
+			ft_putendl("ft_ls: illegal option -- -");
+			ft_putendl("usage: ft_ls [-Ralrt] [file ...]");
 			exit(EXIT_FAILURE);
 		}
 		i++;
@@ -46,7 +47,7 @@ uint8_t			ft_manage_args(int *current_arg, int ac, char **av)
 	while (*current_arg < ac && av[*current_arg][0] == '-'
 			&& av[*current_arg][1] != '\0')
 	{
-		if (av[*current_arg][1] == '-')
+		if (ft_strequ(av[*current_arg], "--") == TRUE)
 		{
 			(*current_arg)++;
 			return (flags);
