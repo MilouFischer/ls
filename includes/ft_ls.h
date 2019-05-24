@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 14:59:11 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 16:11:21 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ typedef	struct		s_dir
 {
 	char			*size;
 	char			*name;
-	char			mode[10];
 	char			*uid;
 	char			*gid;
 	char			*link;
+	char			mode[10];
 	char			time[13];
 	char			type;
 	unsigned long	brut_time;
@@ -77,7 +77,8 @@ typedef struct		s_padding
 }					t_padding;
 
 uint8_t				ft_manage_args(int *current_arg, int ac, char **av);
-void				ft_sort_av(int ac, char **av, t_list **lst_dir,
+void				ft_sort_input(t_list **lst1, t_list **lst2, t_list **head);
+void				ft_manage_input(int ac, char **av, t_list **lst_dir,
 					t_list **lst_file);
 void				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 					t_padding *padding);

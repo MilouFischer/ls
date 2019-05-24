@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:37:23 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 14:30:20 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 15:39:32 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint8_t flags)
 			ft_open_dir((ft_asprintf("%s%s/", path,
 			((t_dir*)(lst->content))->name)), flags);
 		}
-//		ft_free_dir_info(((t_dir*)(lst->content)));
 		lst = lst->next;
 	}
 }
@@ -79,7 +78,6 @@ void			ft_directories(t_list *lst_dir, uint8_t flags)
 {
 	t_list	*head;
 
-	ft_sort(&lst_dir, flags);
 	head = lst_dir;
 	while (lst_dir != NULL)
 	{

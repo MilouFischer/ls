@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:46 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 14:31:44 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 16:47:13 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void		ft_sort_name(t_list **lst1, t_list **lst2, t_list **head)
 	}
 }
 
-void		ft_sort_name_av(t_list **lst1, t_list **lst2, t_list **head)
+void		ft_sort_input(t_list **lst1, t_list **lst2, t_list **head)
 {
 	if (ft_strcmp((*lst1)->content, (*lst2)->content) > 0)
 	{

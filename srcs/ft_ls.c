@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:25:57 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 14:59:19 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 16:47:34 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void		ft_files(t_list *lst_file, uint8_t flags)
 		ft_lstadd(&lst, ft_lstnew(&dir_info, sizeof(dir_info)));
 		lst_file = lst_file->next;
 	}
-	ft_sort(&lst, flags);
+	ft_sort(&lst_file, flags);
 	ft_printlist(lst, &padding, flags);
 	ft_free_lst(&lst);
 }
@@ -44,12 +44,17 @@ int				main(int ac, char **av)
 	lst_dir = NULL;
 	lst_file = NULL;
 	flags = ft_manage_args(&i, ac, av);
-	ft_sort_av(ac - i, av + i, &lst_dir, &lst_file);
+	ft_manage_input(ac - i, av + i, &lst_dir, &lst_file);
+	ft_merge_sort(&lst_dir, ft_sort_input);
+	if ((flags & FLAG_REV) == FLAG_REV)
+		ft_merge_sort(&lst_dir, ft_sort_rev);
 	if (lst_file != NULL)
 	{
 		ft_files(lst_file, flags);
-		if (lst_dir != NULL)
-			ft_printf("\n%.*s:\n", lst_dir->content_size - 1, lst_dir->content);
+		if (lst_dir != NULL && lst_dir->next == NULL)
+			ft_printf("\n%.*s:\n", ft_strlen(lst_dir->content) - 1, lst_dir->content);
+		else if (lst_dir != NULL)
+			ft_putchar('\n');
 	}
 	ft_directories(lst_dir, flags);
 	ft_free_lst(&lst_file);

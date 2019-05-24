@@ -6,13 +6,13 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:40:36 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 14:59:38 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 16:43:20 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg)
+static int		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg)
 {
 	char	*tmp;
 
@@ -25,6 +25,7 @@ static void		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg)
 		{
 			perror((tmp = ft_asprintf("ft_ls: %s", arg)));
 			ft_strdel(&tmp);
+			return (TRUE);
 		}
 	}
 	else if (arg != NULL)
@@ -38,17 +39,24 @@ static void		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg)
 		else
 			ft_lstadd(lst_dir, ft_lstnew(arg, ft_strlen(arg) + 1));
 	}
+	return (FALSE);
 }
 
 static void		ft_list_dir(t_list **lst_dir, t_list **lst_file, char **tab)
 {
 	size_t	i;
+	int		error;
 
 	i = 0;
+	error = 0;
 	if (tab[0] == NULL)
 		ft_lstadd(lst_dir, ft_lstnew("./", 3));
 	while (tab[i] != NULL)
-		ft_check_dir(lst_dir, lst_file, tab[i++]);
+		error += ft_check_dir(lst_dir, lst_file, tab[i++]);
+	if (error >= 1 && *lst_dir != NULL && (*lst_dir)->next == NULL && *lst_file == NULL)
+		ft_printf("\n%.*s:\n", ft_strlen((*lst_dir)->content) - 1, (*lst_dir)->content);
+	else if (error >= 1 && *lst_dir != NULL && *lst_file == NULL)
+		ft_putchar('\n');
 }
 
 static void		ft_selection_sort(char **tab)
@@ -75,7 +83,8 @@ static void		ft_selection_sort(char **tab)
 	}
 }
 
-void			ft_sort_av(int ac, char **av, t_list **lst_dir, t_list **lst_file)
+void			ft_manage_input(int ac, char **av, t_list **lst_dir,
+				t_list **lst_file)
 {
 	char	**tab;
 	int		i;
