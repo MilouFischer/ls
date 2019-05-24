@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 16:11:21 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 18:13:30 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef	struct		s_dir
 	char			mode[10];
 	char			time[13];
 	char			type;
+	int				nb_mode;
 	unsigned long	brut_time;
 }					t_dir;
 

@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:22 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/22 11:28:07 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 18:11:16 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void			ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 		usr = *getpwuid(buf.st_uid);
 		grp = *getgrgid(buf.st_gid);
 		ft_get_padding((dir_info->name = ft_strdup(name)), &padding->name);
+		dir_info->nb_mode = buf.st_mode;
 		ft_get_type(buf.st_mode, dir_info);
 		ft_get_mode(buf.st_mode, dir_info);
 		ft_get_padding((dir_info->link = ft_itoa(buf.st_nlink)),

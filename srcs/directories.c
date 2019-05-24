@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:37:23 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 17:22:18 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/24 18:36:43 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,16 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint8_t flags)
 		&& ft_strequ(((t_dir*)(lst->content))->name, "..") == 0)
 		{
 			ft_putchar('\n');
-			tmp = ft_asprintf("%s%s", path, ((t_dir*)(lst->content))->name);
-			ft_printf("%s:\n", tmp);
-			ft_strdel(&tmp);
-			ft_open_dir((ft_asprintf("%s%s/", path,
-			((t_dir*)(lst->content))->name)), flags);
+			tmp = ft_asprintf("%s%s/", path, ((t_dir*)(lst->content))->name);
+			ft_printf("%.*s:\n", ft_strlen(tmp) - 1, tmp);
+			if (opendir(tmp) == NULL)
+			{
+				ft_strdel(&tmp);
+				perror((tmp = ft_asprintf("ft_ls: %s", ((t_dir*)(lst->content))->name)));
+				ft_strdel(&tmp);
+				return ;
+			}
+			ft_open_dir(tmp, flags);
 		}
 		lst = lst->next;
 	}
