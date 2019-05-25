@@ -14,7 +14,8 @@
 # define FT_LS_H
 
 # include <dirent.h>
-# include <sys/types.h>
+//# include <sys/types.h>
+# include <sys/sysmacros.h>
 # include <sys/stat.h>
 # include <stdio.h>
 # include <pwd.h>
@@ -59,6 +60,7 @@ typedef	struct		s_dir
 	char			*uid;
 	char			*gid;
 	char			*link;
+	char			*driver_id;
 	char			mode[10];
 	char			time[13];
 	char			type;

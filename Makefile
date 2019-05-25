@@ -27,7 +27,7 @@ PATHLIB += libft/
 
 #===================================COMPILE=====================================
 
-CC = clang
+CC = gcc
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
@@ -60,7 +60,7 @@ vpath %$(INCLUDES) $(IFLAGS)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(PATHO) $(OBJS) $(HEAD)
+$(NAME): $(LIBFT) $(PATHO) $(OBJS) $(INCLUDES)$(HEAD)
 	$(CC) $(OBJS) $(CFLAGS) $(LIBFT) -o $@
 
 $(OBJS): $(PATHO)%.o: %.c
