@@ -21,7 +21,8 @@ void		ft_free_dir_info(t_list *lst)
 		ft_strdel(&((t_dir*)(lst->content))->uid);
 		ft_strdel(&((t_dir*)(lst->content))->gid);
 		ft_strdel(&((t_dir*)(lst->content))->size);
-		ft_strdel(&((t_dir*)(lst->content))->driver_id);
+		ft_strdel(&((t_dir*)(lst->content))->major);
+		ft_strdel(&((t_dir*)(lst->content))->minor);
 		lst = lst->next;
 	}
 }
@@ -42,9 +43,10 @@ void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint8_t flags)
 		&& ft_strchr(dir->name, '/') == NULL)
 		return ;
 	if ((flags & FLAG_L) == FLAG_L && ((dir->type == 'c' || dir->type == 'b')))
-		ft_printf("%c%s %*s %-*s %-*s%*s %s %s\n", dir->type, dir->mode,
+		ft_printf("%c%s %*s %-*s %-*s%*s,%*s %s %s\n", dir->type, dir->mode,
 		padding->link, dir->link, padding->uid, dir->uid, padding->gid,
-		dir->gid, padding->size, dir->driver_id, dir->time, dir->name);
+		dir->gid, padding->major, dir->major, padding->minor, dir->minor,
+		dir->time, dir->name);
 	else if ((flags & FLAG_L) == FLAG_L)
 		ft_printf("%c%s %*s %-*s %-*s%*s %s %s\n", dir->type, dir->mode,
 		padding->link, dir->link, padding->uid, dir->uid, padding->gid,

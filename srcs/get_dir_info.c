@@ -145,9 +145,18 @@ void			ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 		padding->total += buf.st_blocks;
 		dir_info->brut_time = buf.st_mtime;
 		ft_get_time(ctime(&buf.st_mtime), dir_info);
-		ft_get_padding((dir_info->driver_id = ft_itoa(buf.st_rdev)),
-		&padding->size);
-		ft_printf("%d\n", buf.st_dev);
+		ft_get_padding((dir_info->major = ft_itoa(major(buf.st_rdev))),
+		&padding->major);
+		ft_get_padding((dir_info->minor = ft_itoa(minor(buf.st_rdev))),
+		&padding->minor);
+		if (padding->major != 0 || padding->minor != 0)
+		{
+			if (padding->size < padding->major + padding->minor + 1)
+				padding->size = padding->major + padding->minor + 1;
+			else
+				padding->major += padding->size -
+				(padding->major + padding->minor + 1);
+		}
 	}
 	else
 		perror("stat");

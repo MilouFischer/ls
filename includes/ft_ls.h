@@ -14,7 +14,7 @@
 # define FT_LS_H
 
 # include <dirent.h>
-//# include <sys/types.h>
+# include <sys/types.h>
 # include <sys/sysmacros.h>
 # include <sys/stat.h>
 # include <stdio.h>
@@ -60,7 +60,8 @@ typedef	struct		s_dir
 	char			*uid;
 	char			*gid;
 	char			*link;
-	char			*driver_id;
+	char			*major;
+	char			*minor;
 	char			mode[10];
 	char			time[13];
 	char			type;
@@ -76,6 +77,8 @@ typedef struct		s_padding
 	size_t			gid;
 	size_t			link;
 	size_t			type;
+	size_t			major;
+	size_t			minor;
 	size_t			total;
 }					t_padding;
 
