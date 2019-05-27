@@ -125,29 +125,31 @@ static void		ft_get_type(int nb_mode, t_dir *dir_info)
 void			ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 				t_padding *padding)
 {
-	struct stat		buf;
+	struct stat		stat;
 	struct passwd	usr;
 	struct group	grp;
+	char			buf[PATH_MAX - 1];
+	ssize_t			ret;
 
-	if ((lstat(path, &buf)) != -1)
+	if ((lstat(path, &stat)) != -1)
 	{
-		usr = *getpwuid(buf.st_uid);
-		grp = *getgrgid(buf.st_gid);
+		usr = *getpwuid(stat.st_uid);
+		grp = *getgrgid(stat.st_gid);
 		ft_get_padding((dir_info->name = ft_strdup(name)), &padding->name);
-		dir_info->nb_mode = buf.st_mode;
-		ft_get_type(buf.st_mode, dir_info);
-		ft_get_mode(buf.st_mode, dir_info);
-		ft_get_padding((dir_info->link = ft_itoa(buf.st_nlink)),
+		dir_info->nb_mode = stat.st_mode;
+		ft_get_type(stat.st_mode, dir_info);
+		ft_get_mode(stat.st_mode, dir_info);
+		ft_get_padding((dir_info->link = ft_itoa(stat.st_nlink)),
 		&padding->link);
 		ft_get_padding((dir_info->uid = ft_strdup(usr.pw_name)), &padding->uid);
 		ft_get_padding((dir_info->gid = ft_strdup(grp.gr_name)), &padding->gid);
-		ft_get_padding((dir_info->size = ft_itoa(buf.st_size)), &padding->size);
-		padding->total += buf.st_blocks;
-		dir_info->brut_time = buf.st_mtime;
-		ft_get_time(ctime(&buf.st_mtime), dir_info);
-		ft_get_padding((dir_info->major = ft_itoa(major(buf.st_rdev))),
+		ft_get_padding((dir_info->size = ft_itoa(stat.st_size)), &padding->size);
+		padding->total += stat.st_blocks;
+		dir_info->brut_time = stat.st_mtime;
+		ft_get_time(ctime(&stat.st_mtime), dir_info);
+		ft_get_padding((dir_info->major = ft_itoa(major(stat.st_rdev))),
 		&padding->major);
-		ft_get_padding((dir_info->minor = ft_itoa(minor(buf.st_rdev))),
+		ft_get_padding((dir_info->minor = ft_itoa(minor(stat.st_rdev))),
 		&padding->minor);
 		if (padding->major != 0 || padding->minor != 0)
 		{
@@ -157,8 +159,18 @@ void			ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 				padding->major += padding->size -
 				(padding->major + padding->minor + 1);
 		}
+		if (dir_info->type == 'l')
+		{
+			if ((ret = readlink(path, buf, PATH_MAX)) > 0)
+			{
+				buf[ret] = '\0';
+				dir_info->name = ft_join_free(dir_info->name, ft_asprintf(" -> %s", buf), 3);
+			}
+			else
+				perror(path);
+		}
 	}
 	else
-		perror("stat");
+		return ;
 	ft_strdel(&path);
 }

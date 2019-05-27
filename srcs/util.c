@@ -57,7 +57,9 @@ void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint8_t flags)
 
 void		ft_printlist(t_list *lst, t_padding *padding, uint8_t flags)
 {
-	if ((flags & FLAG_L) == FLAG_L
+	if (lst == NULL || lst->content == NULL)
+		ft_printf("total %d\n", padding->total);
+	else if ((flags & FLAG_L) == FLAG_L
 		&& ((((t_dir*)(lst->content))->type) & TYPE_F) != TYPE_F)
 		ft_printf("total %d\n", padding->total);
 	while (lst != NULL && lst->content != NULL)

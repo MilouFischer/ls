@@ -28,6 +28,7 @@
 #include <stdint.h>
 
 # define SIX_MONTHS	15768000
+# define PARH_MAX   4096
 # define FLAG_L		0x01
 # define FLAG_A		0x02
 # define FLAG_REV	0x04
@@ -84,8 +85,8 @@ typedef struct		s_padding
 
 uint8_t				ft_manage_args(int *current_arg, int ac, char **av);
 void				ft_sort_input(t_list **lst1, t_list **lst2, t_list **head);
-void				ft_manage_input(int ac, char **av, t_list **lst_dir,
-					t_list **lst_file);
+void				ft_manage_input(char **av, t_list **lst_dir,
+					t_list **lst_file, uint8_t flags);
 void				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 					t_padding *padding);
 void				ft_directories(t_list *lst_dir, uint8_t flags);

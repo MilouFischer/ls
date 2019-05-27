@@ -44,7 +44,7 @@ int				main(int ac, char **av)
 	lst_dir = NULL;
 	lst_file = NULL;
 	flags = ft_manage_args(&i, ac, av);
-	ft_manage_input(ac - i, av + i, &lst_dir, &lst_file);
+	ft_manage_input(av + i, &lst_dir, &lst_file, flags);
 	ft_merge_sort(&lst_dir, ft_sort_input);
 	if ((flags & FLAG_REV) == FLAG_REV)
 		ft_merge_sort(&lst_dir, ft_sort_rev);
@@ -58,6 +58,5 @@ int				main(int ac, char **av)
 	}
 	ft_directories(lst_dir, flags);
 	ft_free_lst(&lst_file);
-	ft_free_lst(&lst_dir);
 	return (EXIT_SUCCESS);
 }
