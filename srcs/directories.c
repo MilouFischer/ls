@@ -35,6 +35,7 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint8_t flags)
 				return ;
 			}
 			ft_open_dir(tmp, flags);
+			ft_strdel(&tmp);
 			free(dir);
 		}
 		lst = lst->next;

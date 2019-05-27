@@ -15,11 +15,12 @@
 static int		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg,
 				uint8_t flags)
 {
+	void		*dir;
 	char		*tmp;
 	t_dir		dir_info;
 	t_padding	padding;
 
-	if (opendir(arg) == NULL)
+	if ((dir = opendir(arg)) == NULL)
 	{
 		if (errno == ENOTDIR)
 			ft_lstadd(lst_file, ft_lstnew(arg, ft_strlen(arg) + 1));
@@ -46,6 +47,7 @@ static int		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg,
 		else
 			ft_lstadd(lst_dir, ft_lstnew(arg, ft_strlen(arg) + 1));
 	}
+	free(dir);
 	return (FALSE);
 }
 

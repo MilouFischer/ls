@@ -12,19 +12,17 @@
 
 #include "ft_ls.h"
 
-void		ft_free_dir_info(t_list *lst)
+void		ft_free_dir_info(void *content, size_t content_size)
 {
-	while (lst != NULL)
-	{
-		ft_strdel(&((t_dir*)(lst->content))->name);
-		ft_strdel(&((t_dir*)(lst->content))->link);
-		ft_strdel(&((t_dir*)(lst->content))->uid);
-		ft_strdel(&((t_dir*)(lst->content))->gid);
-		ft_strdel(&((t_dir*)(lst->content))->size);
-		ft_strdel(&((t_dir*)(lst->content))->major);
-		ft_strdel(&((t_dir*)(lst->content))->minor);
-		lst = lst->next;
-	}
+	(void)content_size;
+	/*ft_strdel(&((t_dir*)(content))->name);
+	ft_strdel(&((t_dir*)(content))->link);
+	ft_strdel(&((t_dir*)(content))->uid);
+	ft_strdel(&((t_dir*)(content))->gid);
+	ft_strdel(&((t_dir*)(content))->size);
+	ft_strdel(&((t_dir*)(content))->major);
+	ft_strdel(&((t_dir*)(content))->minor);*/
+	ft_putendl(((t_dir*)content).name);
 }
 
 void		ft_free_lst(t_list **lst)

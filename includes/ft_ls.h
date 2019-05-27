@@ -99,7 +99,7 @@ void				ft_sort_time(t_list **lst1, t_list **lst2, t_list **head);
 void				ft_sort_rev(t_list **lst1, t_list **lst2, t_list **head);
 void				ft_sort_name_av(t_list **lst1, t_list **lst2,
 					t_list **head);
-void				ft_free_dir_info(t_list *lst);
+void				ft_free_dir_info(void *content, size_t content_size);
 void				ft_free_lst(t_list **lst);
 void				ft_print_dir_info(t_dir *dir, t_padding *padding,
 					uint8_t flags);

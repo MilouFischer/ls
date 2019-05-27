@@ -57,7 +57,7 @@ int				main(int ac, char **av)
 			ft_putchar('\n');
 	}
 	ft_directories(lst_dir, flags);
-	ft_free_lst(&lst_file);
-	ft_free_lst(&lst_dir);
+	ft_lstdel(&lst_file, ft_free_dir_info);
+	ft_lstdel(&lst_dir, ft_free_dir_info);
 	return (EXIT_SUCCESS);
 }
