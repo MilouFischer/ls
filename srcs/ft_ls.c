@@ -58,5 +58,6 @@ int				main(int ac, char **av)
 	}
 	ft_directories(lst_dir, flags);
 	ft_free_lst(&lst_file);
+	ft_free_lst(&lst_dir);
 	return (EXIT_SUCCESS);
 }

@@ -14,7 +14,8 @@
 
 static void		ft_find_next_dir(char *path, t_list *lst, uint8_t flags)
 {
-	char			*tmp;
+	void	*dir;
+	char	*tmp;
 
 	while (lst != NULL)
 	{
@@ -26,7 +27,7 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint8_t flags)
 			ft_putchar('\n');
 			tmp = ft_asprintf("%s/%s", path, ((t_dir*)(lst->content))->name);
 			ft_printf("%s:\n", tmp);
-			if (opendir(tmp) == NULL)
+			if ((dir = opendir(tmp)) == NULL)
 			{
 				ft_strdel(&tmp);
 				perror((tmp = ft_asprintf("ft_ls: %s", ((t_dir*)(lst->content))->name)));
@@ -34,6 +35,7 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint8_t flags)
 				return ;
 			}
 			ft_open_dir(tmp, flags);
+			free(dir);
 		}
 		lst = lst->next;
 	}
@@ -73,9 +75,9 @@ void			ft_open_dir(char *path, uint8_t flags)
 	ft_printlist(lst, &padding, flags);
 	if ((flags & FLAG_R) == FLAG_R)
 		ft_find_next_dir(path, lst, flags);
-	ft_strdel(&path);
 	ft_free_dir_info(lst);
 	ft_free_lst(&lst);
+	free(dir);
 }
 
 void			ft_directories(t_list *lst_dir, uint8_t flags)
