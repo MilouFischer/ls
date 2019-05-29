@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:22 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 18:11:16 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 13:05:56 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,5 @@ void			ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 				perror(path);
 		}
 	}
-	else
-		return ;
 	ft_strdel(&path);
 }

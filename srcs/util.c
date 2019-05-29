@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:56 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 12:43:29 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 12:57:17 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ void		ft_free_dir_info(void *content, size_t content_size)
 		ft_strdel(&((t_dir*)(content))->uid);
 		ft_strdel(&((t_dir*)(content))->gid);
 		ft_strdel(&((t_dir*)(content))->link);
-		if (((t_dir*)(content))->type == 'l')
-		{
-			ft_strdel(&((t_dir*)(content))->minor);
-			ft_strdel(&((t_dir*)(content))->minor);
-		}
+		ft_strdel(&((t_dir*)(content))->minor);
+		ft_strdel(&((t_dir*)(content))->minor);
 		free(content);
 	}
 }
