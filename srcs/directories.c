@@ -6,37 +6,51 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:37:23 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 13:27:51 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 14:55:05 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		ft_find_next_dir(char *path, t_list *lst, uint8_t flags)
+static int		ft_check_right(char *path, t_list *lst)
 {
 	void	*dir;
+	char	*tmp;
+
+	if ((dir = opendir(path)) == NULL)
+	{
+		perror((tmp = ft_asprintf("ft_ls: %s",
+		((t_dir*)(lst->content))->name)));
+		ft_strdel(&tmp);
+		return (FALSE);
+	}
+	free(dir);
+	return (TRUE);
+}
+
+static void		ft_find_next_dir(char *path, t_list *lst, uint8_t flags)
+{
 	char	*tmp;
 
 	while (lst != NULL)
 	{
 		if ((((t_dir*)(lst->content))->type == 'd'
-		|| (((t_dir*)(lst->content))->type == 'l' && (flags & FLAG_L) != FLAG_L))
+		|| (((t_dir*)(lst->content))->type == 'l'
+		&& (flags & FLAG_L) != FLAG_L))
 		&& ft_strequ(((t_dir*)(lst->content))->name, ".") == 0
 		&& ft_strequ(((t_dir*)(lst->content))->name, "..") == 0)
 		{
 			ft_putchar('\n');
 			tmp = ft_asprintf("%s/%s", path, ((t_dir*)(lst->content))->name);
 			ft_printf("%s:\n", tmp);
-			if ((dir = opendir(tmp)) == NULL)
+			if (ft_check_right(tmp, lst) == FALSE)
 			{
-				ft_strdel(&tmp);
-				perror((tmp = ft_asprintf("ft_ls: %s", ((t_dir*)(lst->content))->name)));
 				ft_strdel(&tmp);
 				return ;
 			}
+			ft_check_right(tmp, lst);
 			ft_open_dir(tmp, flags);
 			ft_strdel(&tmp);
-			free(dir);
 		}
 		lst = lst->next;
 	}

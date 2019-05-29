@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 11:49:37 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:07:46 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@
 # include <time.h>
 # include <string.h>
 # include <errno.h>
+# include <stdint.h>
 # include "libft.h"
-
-#include <stdint.h>
 
 # define SIX_MONTHS	15768000
 # define PATH_MAX   4096

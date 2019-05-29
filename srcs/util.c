@@ -6,14 +6,15 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:56 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 12:57:17 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 14:37:41 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		ft_free_content(void *content, size_t content_size __attribute__((unused)))
+void		ft_free_content(void *content, size_t content_size)
 {
+	(void)content_size;
 	ft_strdel((char**)&content);
 }
 
@@ -26,7 +27,7 @@ void		ft_free_dir_info(void *content, size_t content_size)
 		ft_strdel(&((t_dir*)(content))->uid);
 		ft_strdel(&((t_dir*)(content))->gid);
 		ft_strdel(&((t_dir*)(content))->link);
-		ft_strdel(&((t_dir*)(content))->minor);
+		ft_strdel(&((t_dir*)(content))->major);
 		ft_strdel(&((t_dir*)(content))->minor);
 		free(content);
 	}
