@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 15:43:05 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:52:51 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ void				ft_manage_input(char **av, t_list **lst_dir,
 					t_list **lst_file, uint8_t flags);
 void				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 					t_padding *padding);
+void				ft_get_time(const char *brut_tm, t_dir *dir_info);
+void				ft_get_type(int nb_mode, t_dir *dir_info);
+void				ft_get_mode(int nb_mode, t_dir *dir_info);
 void				ft_directories(t_list *lst_dir, uint8_t flags);
 void				ft_open_dir(char *path, uint8_t flags);
 void				ft_sort(t_list **lst, uint8_t flags);

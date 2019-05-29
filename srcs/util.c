@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:56 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 15:40:47 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:46:40 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void		ft_free_dir_info(void *content, size_t content_size)
 		ft_strdel(&((t_dir*)(content))->link);
 		ft_strdel(&((t_dir*)(content))->major);
 		ft_strdel(&((t_dir*)(content))->minor);
-//		free(content);
 	}
 }
 
@@ -51,7 +50,8 @@ void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint8_t flags)
 		ft_printf("%-*s", padding->name, dir->name);
 }
 
-void		ft_printlist(t_list *lst, t_padding *padding, uint8_t flags, int print)
+void		ft_printlist(t_list *lst, t_padding *padding, uint8_t flags,
+			int print)
 {
 	if (lst == NULL || lst->content == NULL)
 		ft_printf("total %d\n", padding->total);
