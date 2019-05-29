@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 18:13:30 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 11:49:37 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <dirent.h>
 # include <sys/types.h>
-# include <sys/sysmacros.h>
 # include <sys/stat.h>
 # include <stdio.h>
 # include <pwd.h>
@@ -28,7 +27,7 @@
 #include <stdint.h>
 
 # define SIX_MONTHS	15768000
-# define PARH_MAX   4096
+# define PATH_MAX   4096
 # define FLAG_L		0x01
 # define FLAG_A		0x02
 # define FLAG_REV	0x04
@@ -99,11 +98,11 @@ void				ft_sort_time(t_list **lst1, t_list **lst2, t_list **head);
 void				ft_sort_rev(t_list **lst1, t_list **lst2, t_list **head);
 void				ft_sort_name_av(t_list **lst1, t_list **lst2,
 					t_list **head);
-void				ft_free_dir_info(void *content, size_t content_size);
-void				ft_free_lst(t_list **lst);
 void				ft_print_dir_info(t_dir *dir, t_padding *padding,
 					uint8_t flags);
 void				ft_printlist(t_list *lst, t_padding *padding,
 					uint8_t flags);
+void				ft_free_dir_info(void *content, size_t content_size);
+void				ft_free_content(void *content, size_t content_size);
 
 #endif

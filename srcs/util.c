@@ -6,33 +6,33 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:56 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 18:04:22 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 12:43:29 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void		ft_free_dir_info(void *content, size_t content_size)
+void		ft_free_content(void *content, size_t content_size __attribute__((unused)))
 {
-	(void)content_size;
-	/*ft_strdel(&((t_dir*)(content))->name);
-	ft_strdel(&((t_dir*)(content))->link);
-	ft_strdel(&((t_dir*)(content))->uid);
-	ft_strdel(&((t_dir*)(content))->gid);
-	ft_strdel(&((t_dir*)(content))->size);
-	ft_strdel(&((t_dir*)(content))->major);
-	ft_strdel(&((t_dir*)(content))->minor);*/
-	ft_putendl(((t_dir*)content).name);
+	ft_strdel((char**)&content);
 }
 
-void		ft_free_lst(t_list **lst)
+void		ft_free_dir_info(void *content, size_t content_size)
 {
-	if (*lst == NULL)
-		return ;
-	ft_free_lst(&(*lst)->next);
-	free((*lst)->content);
-	free(*lst);
-	*lst = NULL;
+	if (content_size != 0)
+	{
+		ft_strdel(&((t_dir*)(content))->name);
+		ft_strdel(&((t_dir*)(content))->size);
+		ft_strdel(&((t_dir*)(content))->uid);
+		ft_strdel(&((t_dir*)(content))->gid);
+		ft_strdel(&((t_dir*)(content))->link);
+		if (((t_dir*)(content))->type == 'l')
+		{
+			ft_strdel(&((t_dir*)(content))->minor);
+			ft_strdel(&((t_dir*)(content))->minor);
+		}
+		free(content);
+	}
 }
 
 void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint8_t flags)
