@@ -82,7 +82,7 @@ void			ft_open_dir(char *path, uint8_t flags)
 	if ((flags & FLAG_R) == FLAG_R)
 		ft_find_next_dir(path, lst, flags);
 	free(dir);
-	ft_lstdel(&lst, ft_free_dir_info);
+	ft_lstdel(&lst, ft_free_struct_list);
 }
 
 void			ft_directories(t_list *lst_dir, uint8_t flags)

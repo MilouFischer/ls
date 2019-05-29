@@ -18,18 +18,27 @@ void		ft_free_content(void *content, size_t content_size)
 	ft_strdel((char**)&content);
 }
 
-void		ft_free_dir_info(void *content, size_t content_size)
+void		ft_free_dir_info(t_dir *dir)
 {
-	if (content_size != 0)
+	if (dir != NULL)
 	{
-		ft_strdel(&((t_dir*)(content))->name);
-		ft_strdel(&((t_dir*)(content))->size);
-		ft_strdel(&((t_dir*)(content))->uid);
-		ft_strdel(&((t_dir*)(content))->gid);
-		ft_strdel(&((t_dir*)(content))->link);
-		ft_strdel(&((t_dir*)(content))->major);
-		ft_strdel(&((t_dir*)(content))->minor);
+		ft_strdel(&dir->name);
+		ft_strdel(&dir->size);
+		ft_strdel(&dir->uid);
+		ft_strdel(&dir->gid);
+		ft_strdel(&dir->link);
+		ft_strdel(&dir->major);
+		ft_strdel(&dir->minor);
+		ft_strdel(&dir->path);
 	}
+}
+
+void		ft_free_struct_list(void *content, size_t content_size)
+{
+	(void)content_size;
+	ft_free_dir_info(((t_dir*)(content)));
+	free(content);
+	content = NULL;
 }
 
 void		ft_print_color(t_dir *dir, t_padding *padding, uint8_t flags)

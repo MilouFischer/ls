@@ -32,7 +32,7 @@ static void		ft_put_dir_in_list(t_list **lst_dir, t_list **lst_file,
 	}
 	else
 		ft_lstadd(lst_dir, ft_lstnew(arg, ft_strlen(arg) + 1));
-	ft_free_dir_info(&dir_info, sizeof(dir_info));
+	ft_free_dir_info(&dir_info);
 }
 
 static int		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg,

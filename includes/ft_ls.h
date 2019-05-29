@@ -16,6 +16,7 @@
 # include <dirent.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/sysmacros.h>
 # include <stdio.h>
 # include <pwd.h>
 # include <grp.h>
@@ -109,7 +110,8 @@ void				ft_print_dir_info(t_dir *dir, t_padding *padding,
 					uint8_t flags);
 void				ft_printlist(t_list *lst, t_padding *padding,
 					uint8_t flags, int print);
-void				ft_free_dir_info(void *content, size_t content_size);
+void				ft_free_dir_info(t_dir *dir);
+void				ft_free_struct_list(void *content, size_t content_size);
 void				ft_free_content(void *content, size_t content_size);
 
 #endif

@@ -30,7 +30,7 @@ static void		ft_files(t_list *lst_file, uint8_t flags)
 	}
 	ft_sort(&lst, flags);
 	ft_printlist(lst, &padding, flags, HIDE_TOTAL);
-	ft_lstdel(&lst, ft_free_dir_info);
+	ft_lstdel(&lst, ft_free_struct_list);
 }
 
 int				main(int ac, char **av)
