@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:56 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 17:56:47 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 18:14:36 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		ft_print_color(t_dir *dir, t_padding *padding, uint8_t flags)
 	else
 		ft_printf("%s", dir->name);
 	if ((flags & FLAG_L) != FLAG_L)
-		ft_printf("%*c", padding->name - ft_strlen(dir->name), ' ');
+		ft_printf("%*s", padding->name - ft_strlen(dir->name), " ");
 	else
 		ft_putchar('\n');
 }
