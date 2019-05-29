@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:35:48 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 15:06:12 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 16:48:40 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void		ft_get_flags(char *arg, uint8_t *flags)
 			*flags |= FLAG_T;
 		else if (arg[i] == 'R')
 			*flags |= FLAG_R;
+		else if (arg[i] == 'G')
+			*flags |= FLAG_G;
 		else
 		{
 			ft_putendl("ft_ls: illegal option -- -");

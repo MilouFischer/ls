@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 15:52:51 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 17:45:26 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define FLAG_REV		0x04
 # define FLAG_T			0x08
 # define FLAG_R			0x10
+# define FLAG_G			0x20
 # define OTH_X			0x001
 # define OTH_W			0x002
 # define OTH_R			0x004
@@ -63,6 +64,7 @@ typedef	struct		s_dir
 	char			*link;
 	char			*major;
 	char			*minor;
+	char			*path;
 	char			mode[10];
 	char			time[13];
 	char			type;
@@ -92,6 +94,7 @@ void				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 void				ft_get_time(const char *brut_tm, t_dir *dir_info);
 void				ft_get_type(int nb_mode, t_dir *dir_info);
 void				ft_get_mode(int nb_mode, t_dir *dir_info);
+void				ft_format_s_link(t_dir *dir_info, uint8_t flags);
 void				ft_directories(t_list *lst_dir, uint8_t flags);
 void				ft_open_dir(char *path, uint8_t flags);
 void				ft_sort(t_list **lst, uint8_t flags);
