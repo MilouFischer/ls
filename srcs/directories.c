@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:37:23 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 12:38:54 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 13:27:51 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,6 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint8_t flags)
 	}
 }
 
-static void		ft_sort_dir(t_list **lst, uint8_t flags)
-{
-	ft_merge_sort(lst, &ft_sort_name);
-	if ((flags & FLAG_T) == FLAG_T)
-		ft_merge_sort(lst, &ft_sort_time);
-	if ((flags & FLAG_REV) == FLAG_REV)
-		ft_merge_sort(lst, &ft_sort_rev);
-}
-
 void			ft_open_dir(char *path, uint8_t flags)
 {
 	void			*dir;
@@ -72,7 +63,7 @@ void			ft_open_dir(char *path, uint8_t flags)
 			ft_lstadd(&lst, ft_lstnew(&dir_info, sizeof(t_dir)));
 		}
 	}
-	ft_sort_dir(&lst, flags);
+	ft_sort(&lst, flags);
 	ft_printlist(lst, &padding, flags);
 	if ((flags & FLAG_R) == FLAG_R)
 		ft_find_next_dir(path, lst, flags);
