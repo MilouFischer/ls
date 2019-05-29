@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:25:57 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 14:36:15 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:39:48 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		ft_files(t_list *lst_file, uint8_t flags)
 		lst_file = lst_file->next;
 	}
 	ft_sort(&lst, flags);
-	ft_printlist(lst, &padding, flags);
+	ft_printlist(lst, &padding, flags, HIDE_TOTAL);
 	ft_lstdel(&lst, ft_free_dir_info);
 }
 

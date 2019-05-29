@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 15:07:46 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/29 15:43:05 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,34 @@
 # include <stdint.h>
 # include "libft.h"
 
-# define SIX_MONTHS	15768000
-# define PATH_MAX   4096
-# define FLAG_L		0x01
-# define FLAG_A		0x02
-# define FLAG_REV	0x04
-# define FLAG_T		0x08
-# define FLAG_R		0x10
-# define OTH_X		0x001
-# define OTH_W		0x002
-# define OTH_R		0x004
-# define GRP_X		0x008
-# define GRP_W		0x010
-# define GRP_R		0x020
-# define USR_X		0x040
-# define USR_W		0x080
-# define USR_R		0x100
-# define STICKY_BIT	0x200
-# define SET_GID	0x400
-# define SET_UID	0x800
-# define TYPE_P		0x1
-# define TYPE_C		0x2
-# define TYPE_D		0x4
-# define TYPE_B		0x6
-# define TYPE_F		0x8
-# define TYPE_L		0xA
-# define TYPE_S		0xC
+# define SIX_MONTHS		15768000
+# define PATH_MAX		4096
+# define HIDE_TOTAL		0
+# define PRINT_TOTAL	1
+# define FLAG_L			0x01
+# define FLAG_A			0x02
+# define FLAG_REV		0x04
+# define FLAG_T			0x08
+# define FLAG_R			0x10
+# define OTH_X			0x001
+# define OTH_W			0x002
+# define OTH_R			0x004
+# define GRP_X			0x008
+# define GRP_W			0x010
+# define GRP_R			0x020
+# define USR_X			0x040
+# define USR_W			0x080
+# define USR_R			0x100
+# define STICKY_BIT		0x200
+# define SET_GID		0x400
+# define SET_UID		0x800
+# define TYPE_P			0x1
+# define TYPE_C			0x2
+# define TYPE_D			0x4
+# define TYPE_B			0x6
+# define TYPE_F			0x8
+# define TYPE_L			0xA
+# define TYPE_S			0xC
 
 typedef	struct		s_dir
 {
@@ -100,7 +102,7 @@ void				ft_sort_name_av(t_list **lst1, t_list **lst2,
 void				ft_print_dir_info(t_dir *dir, t_padding *padding,
 					uint8_t flags);
 void				ft_printlist(t_list *lst, t_padding *padding,
-					uint8_t flags);
+					uint8_t flags, int print);
 void				ft_free_dir_info(void *content, size_t content_size);
 void				ft_free_content(void *content, size_t content_size);
 
