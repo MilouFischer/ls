@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 17:45:26 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/30 11:40:23 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <dirent.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <sys/sysmacros.h>
 # include <stdio.h>
 # include <pwd.h>
 # include <grp.h>

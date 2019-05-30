@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:37:23 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 15:39:51 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/30 12:24:16 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int		ft_check_right(char *path, t_list *lst)
 		perror((tmp = ft_asprintf("ft_ls: %s",
 		((t_dir*)(lst->content))->name)));
 		ft_strdel(&tmp);
+		free(dir);
 		return (FALSE);
 	}
 	free(dir);
