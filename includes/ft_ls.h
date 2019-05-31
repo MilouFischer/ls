@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/31 17:08:19 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:52:10 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ void				ft_printlist(t_list *lst, t_padding *padding,
 					uint8_t flags, int print);
 void				ft_column_display(t_list *lst, t_padding *padding,
 					uint8_t flags);
-void				ft_print_color(t_dir *dir, t_padding *padding, uint8_t flags);
+void				ft_print_color(t_dir *dir, t_padding *padding,
+					uint8_t flags);
 void				ft_free_dir_info(t_dir *dir);
 void				ft_free_struct_list(void *content, size_t content_size);
 void				ft_free_content(void *content, size_t content_size);
