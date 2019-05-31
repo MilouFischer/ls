@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:22 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 17:48:10 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/31 16:28:26 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			ft_format_s_link(t_dir *dir_info, uint8_t flags)
 	}
 }
 
-static void		ft_compute_padding(char *str, size_t *data)
+static void		ft_max_padding(char *str, size_t *data)
 {
 	size_t	len;
 
@@ -42,13 +42,13 @@ static void		ft_compute_padding(char *str, size_t *data)
 static void		ft_get_padding(t_padding *padding, t_dir *dir_info,
 				size_t nb_blocks)
 {
-	ft_compute_padding(dir_info->name, &padding->name);
-	ft_compute_padding(dir_info->link, &padding->link);
-	ft_compute_padding(dir_info->uid, &padding->uid);
-	ft_compute_padding(dir_info->gid, &padding->gid);
-	ft_compute_padding(dir_info->size, &padding->size);
-	ft_compute_padding(dir_info->major, &padding->major);
-	ft_compute_padding(dir_info->minor, &padding->minor);
+	ft_max_padding(dir_info->name, &padding->name);
+	ft_max_padding(dir_info->link, &padding->link);
+	ft_max_padding(dir_info->uid, &padding->uid);
+	ft_max_padding(dir_info->gid, &padding->gid);
+	ft_max_padding(dir_info->size, &padding->size);
+	ft_max_padding(dir_info->major, &padding->major);
+	ft_max_padding(dir_info->minor, &padding->minor);
 	padding->total += nb_blocks;
 	if (padding->major != 0 || padding->minor != 0)
 	{

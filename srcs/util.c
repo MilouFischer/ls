@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:56 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 18:14:36 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:09:39 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,19 @@ void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint8_t flags)
 	if ((flags & FLAG_A) != FLAG_A && dir->name[0] == '.'
 		&& ft_strchr(dir->name, '/') == NULL)
 		return ;
-	if ((flags & FLAG_L) == FLAG_L && ((dir->type == 'c' || dir->type == 'b')))
+	if (dir->type == 'c' || dir->type == 'b')
 		ft_printf("%c%s %*s %-*s %-*s%*s,%*s %s ", dir->type, dir->mode,
 		padding->link, dir->link, padding->uid, dir->uid, padding->gid,
 		dir->gid, padding->major, dir->major, padding->minor, dir->minor,
 		dir->time);
-	else if ((flags & FLAG_L) == FLAG_L)
+	else
 		ft_printf("%c%s %*s %-*s %-*s%*s %s ", dir->type, dir->mode,
 		padding->link, dir->link, padding->uid, dir->uid, padding->gid,
 		dir->gid, padding->size, dir->size, dir->time);
 	if ((flags & FLAG_G) == FLAG_G)
 		ft_print_color(dir, padding, flags);
 	else
-		ft_printf("%-*s", padding->name, dir->name);
+		ft_printf("%s", dir->name);
 }
 
 void		ft_printlist(t_list *lst, t_padding *padding, uint8_t flags,
@@ -94,11 +94,13 @@ void		ft_printlist(t_list *lst, t_padding *padding, uint8_t flags,
 		ft_printf("total %d\n", padding->total);
 	else if ((flags & FLAG_L) == FLAG_L && print == PRINT_TOTAL)
 		ft_printf("total %d\n", padding->total);
-	while (lst != NULL && lst->content != NULL)
-	{
-		ft_print_dir_info(((t_dir*)(lst->content)), padding, flags);
-		lst = lst->next;
-	}
-	if ((flags & FLAG_L) != FLAG_L)
-		ft_putchar('\n');
+	if ((flags & FLAG_L) == FLAG_L)
+		while (lst != NULL && lst->content != NULL)
+		{
+			ft_print_dir_info(((t_dir*)(lst->content)), padding, flags);
+			ft_putchar('\n');
+			lst = lst->next;
+		}
+	else
+		ft_column_display(lst, padding, flags);
 }
