@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 16:09:47 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/31 17:49:42 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/31 17:53:44 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ static void		ft_print_column(t_dir **tab, size_t nb_arg, t_padding *padding,
 	}
 }
 
-void			ft_column_display(t_list *lst, t_padding *padding, uint8_t flags)
+void			ft_column_display(t_list *lst, t_padding *padding,
+				uint8_t flags)
 {
 	t_dir			**tab;
 	size_t			nb_arg;
