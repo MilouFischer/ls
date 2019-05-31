@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:25:57 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/30 13:28:44 by efischer         ###   ########.fr       */
+/*   Updated: 2019/05/31 14:22:07 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int				main(int ac, char **av)
 		else if (lst_dir != NULL)
 			ft_putchar('\n');
 	}
-	//ft_directories(lst_dir, flags);
+	ft_directories(lst_dir, flags);
 	ft_lstdel(&lst_file, ft_free_content);
 	ft_lstdel(&lst_dir, ft_free_content);
 	return (EXIT_SUCCESS);
