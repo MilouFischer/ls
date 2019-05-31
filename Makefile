@@ -6,18 +6,11 @@
 #    By: efischer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/14 15:49:28 by efischer          #+#    #+#              #
-#    Updated: 2019/05/31 16:45:24 by efischer         ###   ########.fr        #
+#    Updated: 2019/05/31 19:03:48 by efischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
-
-#=====================================HEAD======================================
-
-IFLAGS += -I
-INCLUDES += includes/
-LIBINCLUDES += $(PATHLIB)includes/
-HEAD += ft_ls.h
 
 #=====================================PATH======================================
 
@@ -25,15 +18,19 @@ PATHO += objs/
 PATHI += $(INCLUDES)
 PATHLIB += libft/
 
+#=====================================HEAD======================================
+
+INCLUDES += includes/
+LIBINCLUDES += $(PATHLIB)includes/
+HEAD += ft_ls.h
+IFLAGS += -I
+
 #===================================COMPILE=====================================
 
 CC = gcc
 CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
-DFLAGS += $(CFLAGS)
-DFLAGS += -fsanitize=address,undefined
-DFLAGS += -g3
 COMPILE = $(CC) -c
 
 #=====================================SRCS======================================
@@ -41,7 +38,6 @@ COMPILE = $(CC) -c
 SRCS += ft_ls.c
 SRCS += directories.c
 SRCS += get_dir_info.c
-SRCS += merge_sort.c
 SRCS += sort.c
 SRCS += util.c
 SRCS += flags.c
@@ -58,11 +54,9 @@ LIBFT = $(PATHLIB)libft.a
 vpath %.c srcs/
 vpath %.h $(PATHI)
 
-vpath %$(INCLUDES) $(IFLAGS)
-
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(PATHO) $(OBJS) $(INCLUDES)$(HEAD)
+$(NAME): $(LIBFT) $(PATHO) $(OBJS) $(HEAD)
 	$(CC) $(OBJS) $(CFLAGS) $(LIBFT) -o $@
 
 $(OBJS): $(PATHO)%.o: %.c
