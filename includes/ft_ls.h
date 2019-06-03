@@ -26,6 +26,8 @@
 # include <sys/ioctl.h>
 # include "libft.h"
 
+# include <sys/sysmacros.h>
+
 # define SIX_MONTHS		15768000
 # define PATH_MAX		4096
 # define HIDE_TOTAL		0
@@ -99,6 +101,7 @@ void				ft_format_s_link(t_dir *dir_info, uint8_t flags);
 void				ft_directories(t_list *lst_dir, uint8_t flags);
 void				ft_open_dir(char *path, uint8_t flags);
 void				ft_sort(t_list **lst, uint8_t flags);
+void				ft_selection_sort(char **tab);
 void				ft_merge_sort(t_list **lst, void sort(t_list**, t_list**,
 					t_list**));
 void				ft_sort_name(t_list **lst1, t_list **lst2, t_list **head);

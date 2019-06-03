@@ -12,18 +12,18 @@
 
 NAME = ft_ls
 
+#=====================================HEAD======================================
+
+INCLUDES += includes/
+LIBINCLUDES += libft/includes/
+HEAD += ft_ls.h
+IFLAGS += -I
+
 #=====================================PATH======================================
 
 PATHO += objs/
 PATHI += $(INCLUDES)
 PATHLIB += libft/
-
-#=====================================HEAD======================================
-
-INCLUDES += includes/
-LIBINCLUDES += $(PATHLIB)includes/
-HEAD += ft_ls.h
-IFLAGS += -I
 
 #===================================COMPILE=====================================
 
