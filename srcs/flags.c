@@ -25,12 +25,14 @@ static void		ft_get_flags(char *arg, uint8_t *flags)
 			*flags |= FLAG_A;
 		else if (arg[i] == 'r')
 			*flags |= FLAG_REV;
-		else if (arg[i] == 't')
-			*flags |= FLAG_T;
 		else if (arg[i] == 'R')
 			*flags |= FLAG_R;
+		else if (arg[i] == 't')
+			*flags |= FLAG_T;
 		else if (arg[i] == 'G')
 			*flags |= FLAG_G;
+		else if (arg[i] == 'd')
+			*flags |= FLAG_D;
 		else
 		{
 			ft_putendl("ft_ls: illegal option -- -");

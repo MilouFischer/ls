@@ -22,7 +22,8 @@ static void		ft_put_dir_in_list(t_list **lst_dir, t_list **lst_file,
 	ft_bzero(&dir_info, sizeof(dir_info));
 	ft_bzero(&padding, sizeof(padding));
 	ft_get_dir_info(ft_strdup(arg), arg, &dir_info, &padding);
-	if ((flags & FLAG_L) == FLAG_L && dir_info.type == 'l')
+	if (((flags & FLAG_L) == FLAG_L && dir_info.type == 'l')
+		|| (flags & FLAG_D) == FLAG_D)
 		ft_lstadd(lst_file, ft_lstnew(arg, ft_strlen(arg) + 1));
 	else if (arg[ft_strlen(arg) - 1] == '/')
 	{
@@ -66,7 +67,9 @@ static void		ft_list_dir(t_list **lst_dir, t_list **lst_file, char **tab,
 
 	i = 0;
 	error = 0;
-	if (tab[0] == NULL)
+	if ((flags & FLAG_D) == FLAG_D && tab[0] == NULL)
+		ft_lstadd(lst_file, ft_lstnew(".", 2));
+	else if (tab[0] == NULL)
 		ft_lstadd(lst_dir, ft_lstnew(".", 2));
 	while (tab[i] != NULL)
 		error += ft_check_dir(lst_dir, lst_file, tab[i++], flags);
