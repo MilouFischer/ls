@@ -29,7 +29,7 @@ static int		ft_check_right(char *path, t_list *lst)
 	return (TRUE);
 }
 
-static void		ft_find_next_dir(char *path, t_list *lst, uint8_t flags)
+static void		ft_find_next_dir(char *path, t_list *lst, uint16_t flags)
 {
 	char	*tmp;
 
@@ -57,7 +57,7 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint8_t flags)
 	}
 }
 
-void			ft_open_dir(char *path, uint8_t flags)
+void			ft_open_dir(char *path, uint16_t flags)
 {
 	void			*dir;
 	struct dirent	*dirent;
@@ -86,7 +86,7 @@ void			ft_open_dir(char *path, uint8_t flags)
 	ft_lstdel(&lst, ft_free_struct_list);
 }
 
-void			ft_directories(t_list *lst_dir, uint8_t flags)
+void			ft_directories(t_list *lst_dir, uint16_t flags)
 {
 	t_list	*head;
 

@@ -32,14 +32,15 @@
 # define PATH_MAX		4096
 # define HIDE_TOTAL		0
 # define PRINT_TOTAL	1
-# define FLAG_L			0x01
-# define FLAG_A			0x02
-# define FLAG_REV		0x04
-# define FLAG_T			0x08
-# define FLAG_R			0x10
-# define FLAG_G			0x20
-# define FLAG_D			0x40
-# define FLAG_U			0x80
+# define FLAG_L			0x001
+# define FLAG_A			0x002
+# define FLAG_REV		0x004
+# define FLAG_T			0x008
+# define FLAG_R			0x010
+# define FLAG_G			0x020
+# define FLAG_D			0x040
+# define FLAG_U			0x080
+# define FLAG_F			0x100
 # define OTH_X			0x001
 # define OTH_W			0x002
 # define OTH_R			0x004
@@ -90,19 +91,19 @@ typedef struct		s_padding
 	size_t			total;
 }					t_padding;
 
-uint8_t				ft_manage_args(int *current_arg, int ac, char **av);
+uint16_t			ft_manage_args(int *current_arg, int ac, char **av);
 void				ft_sort_input(t_list **lst1, t_list **lst2, t_list **head);
 void				ft_manage_input(char **av, t_list **lst_dir,
-					t_list **lst_file, uint8_t flags);
+					t_list **lst_file, uint16_t flags);
 void				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 					t_padding *padding);
 void				ft_get_time(const char *brut_tm, t_dir *dir_info);
 void				ft_get_type(int nb_mode, t_dir *dir_info);
 void				ft_get_mode(int nb_mode, t_dir *dir_info);
-void				ft_format_s_link(t_dir *dir_info, uint8_t flags);
-void				ft_directories(t_list *lst_dir, uint8_t flags);
-void				ft_open_dir(char *path, uint8_t flags);
-void				ft_sort(t_list **lst, uint8_t flags);
+void				ft_format_s_link(t_dir *dir_info, uint16_t flags);
+void				ft_directories(t_list *lst_dir, uint16_t flags);
+void				ft_open_dir(char *path, uint16_t flags);
+void				ft_sort(t_list **lst, uint16_t flags);
 void				ft_selection_sort(char **tab);
 void				ft_merge_sort(t_list **lst, void sort(t_list**, t_list**,
 					t_list**));
@@ -112,13 +113,13 @@ void				ft_sort_rev(t_list **lst1, t_list **lst2, t_list **head);
 void				ft_sort_name_av(t_list **lst1, t_list **lst2,
 					t_list **head);
 void				ft_print_dir_info(t_dir *dir, t_padding *padding,
-					uint8_t flags);
+					uint16_t flags);
 void				ft_printlist(t_list *lst, t_padding *padding,
-					uint8_t flags, int print);
+					uint16_t flags, int print);
 void				ft_column_display(t_list *lst, t_padding *padding,
-					uint8_t flags);
+					uint16_t flags);
 void				ft_print_color(t_dir *dir, t_padding *padding,
-					uint8_t flags);
+					uint16_t flags);
 void				ft_free_dir_info(t_dir *dir);
 void				ft_free_struct_list(void *content, size_t content_size);
 void				ft_free_content(void *content, size_t content_size);

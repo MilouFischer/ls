@@ -13,7 +13,7 @@
 #include "ft_ls.h"
 
 static void		ft_put_dir_in_list(t_list **lst_dir, t_list **lst_file,
-				char *arg, uint8_t flags)
+				char *arg, uint16_t flags)
 {
 	t_dir		dir_info;
 	t_padding	padding;
@@ -37,7 +37,7 @@ static void		ft_put_dir_in_list(t_list **lst_dir, t_list **lst_file,
 }
 
 static int		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg,
-				uint8_t flags)
+				uint16_t flags)
 {
 	void		*dir;
 	char		*tmp;
@@ -60,7 +60,7 @@ static int		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg,
 }
 
 static void		ft_list_dir(t_list **lst_dir, t_list **lst_file, char **tab,
-				uint8_t flags)
+				uint16_t flags)
 {
 	size_t	i;
 	int		error;
@@ -81,7 +81,7 @@ static void		ft_list_dir(t_list **lst_dir, t_list **lst_file, char **tab,
 }
 
 void			ft_manage_input(char **av, t_list **lst_dir,
-				t_list **lst_file, uint8_t flags)
+				t_list **lst_file, uint16_t flags)
 {
 	char	**tab;
 	int		i;

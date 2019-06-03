@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-static void		ft_get_flags(char *arg, uint8_t *flags)
+static void		ft_get_flags(char *arg, uint16_t *flags)
 {
 	size_t	i;
 
@@ -35,6 +35,8 @@ static void		ft_get_flags(char *arg, uint8_t *flags)
 			*flags |= FLAG_D;
 		else if (arg[i] == 'U')
 			*flags |= FLAG_U;
+		else if (arg[i] == 'f')
+			*flags |= FLAG_F;
 		else
 		{
 			ft_putendl("ft_ls: illegal option -- -");
@@ -43,11 +45,16 @@ static void		ft_get_flags(char *arg, uint8_t *flags)
 		}
 		i++;
 	}
+	if ((*flags & FLAG_F) == FLAG_F)
+	{
+		*flags |= FLAG_A;
+		*flags |= FLAG_U;
+	}
 }
 
-uint8_t			ft_manage_args(int *current_arg, int ac, char **av)
+uint16_t		ft_manage_args(int *current_arg, int ac, char **av)
 {
-	uint8_t	flags;
+	uint16_t	flags;
 
 	flags = 0;
 	while (*current_arg < ac && av[*current_arg][0] == '-'

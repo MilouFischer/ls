@@ -35,7 +35,7 @@ void		ft_free_struct_list(void *content, size_t content_size)
 	content = NULL;
 }
 
-void		ft_print_color(t_dir *dir, t_padding *padding, uint8_t flags)
+void		ft_print_color(t_dir *dir, t_padding *padding, uint16_t flags)
 {
 	if (dir->type == 'b')
 		ft_printf("\033[46;34m%s\033[0m", dir->name);
@@ -60,7 +60,7 @@ void		ft_print_color(t_dir *dir, t_padding *padding, uint8_t flags)
 		ft_putchar('\n');
 }
 
-void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint8_t flags)
+void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint16_t flags)
 {
 	ft_format_s_link(dir, flags);
 	if ((flags & FLAG_A) != FLAG_A && dir->name[0] == '.'
@@ -81,7 +81,7 @@ void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint8_t flags)
 		ft_printf("%s", dir->name);
 }
 
-void		ft_printlist(t_list *lst, t_padding *padding, uint8_t flags,
+void		ft_printlist(t_list *lst, t_padding *padding, uint16_t flags,
 			int print)
 {
 	if (lst == NULL || lst->content == NULL)

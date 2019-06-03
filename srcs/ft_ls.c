@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-static void		ft_files(t_list *lst_file, uint8_t flags)
+static void		ft_files(t_list *lst_file, uint16_t flags)
 {
 	t_dir		dir_info;
 	t_padding	padding;
@@ -35,10 +35,10 @@ static void		ft_files(t_list *lst_file, uint8_t flags)
 
 int				main(int ac, char **av)
 {
-	t_list	*lst_dir;
-	t_list	*lst_file;
-	int		i;
-	uint8_t	flags;
+	t_list		*lst_dir;
+	t_list		*lst_file;
+	int			i;
+	uint16_t	flags;
 
 	i = 1;
 	lst_dir = NULL;

@@ -63,7 +63,7 @@ void		ft_sort_input(t_list **lst1, t_list **lst2, t_list **head)
 	}
 }
 
-void		ft_sort(t_list **lst, uint8_t flags)
+void		ft_sort(t_list **lst, uint16_t flags)
 {
 	if ((flags & FLAG_U) == FLAG_U)
 		return ;

@@ -45,7 +45,7 @@ static t_dir	**get_arg_tab(t_list *lst, size_t *nb_arg)
 }
 
 static void		ft_print_column(t_dir **tab, size_t nb_arg, t_padding *padding,
-				uint8_t flags)
+				uint16_t flags)
 {
 	struct winsize	winsize;
 	size_t			nb_max_arg_by_line;
@@ -74,7 +74,7 @@ static void		ft_print_column(t_dir **tab, size_t nb_arg, t_padding *padding,
 }
 
 void			ft_column_display(t_list *lst, t_padding *padding,
-				uint8_t flags)
+				uint16_t flags)
 {
 	t_dir			**tab;
 	size_t			nb_arg;

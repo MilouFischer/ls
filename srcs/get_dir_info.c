@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void			ft_format_s_link(t_dir *dir_info, uint8_t flags)
+void			ft_format_s_link(t_dir *dir_info, uint16_t flags)
 {
 	char			buf[PATH_MAX - 1];
 	ssize_t			ret;
