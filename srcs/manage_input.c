@@ -24,15 +24,15 @@ static void		ft_put_dir_in_list(t_list **lst_dir, t_list **lst_file,
 	ft_get_dir_info(ft_strdup(arg), arg, &dir_info, &padding);
 	if (((flags & FLAG_L) == FLAG_L && dir_info.type == 'l')
 		|| (flags & FLAG_D) == FLAG_D)
-		ft_lstadd(lst_file, ft_lstnew(arg, ft_strlen(arg) + 1));
+		ft_lstaddend(lst_file, ft_lstnew(arg, ft_strlen(arg) + 1));
 	else if (arg[ft_strlen(arg) - 1] == '/')
 	{
 		tmp = ft_strndup(arg, ft_strlen(arg) - 1);
-		ft_lstadd(lst_dir, ft_lstnew(tmp, ft_strlen(tmp) + 1));
+		ft_lstaddend(lst_dir, ft_lstnew(tmp, ft_strlen(tmp) + 1));
 		ft_strdel(&tmp);
 	}
 	else
-		ft_lstadd(lst_dir, ft_lstnew(arg, ft_strlen(arg) + 1));
+		ft_lstaddend(lst_dir, ft_lstnew(arg, ft_strlen(arg) + 1));
 	ft_free_dir_info(&dir_info);
 }
 
@@ -45,7 +45,7 @@ static int		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg,
 	if ((dir = opendir(arg)) == NULL)
 	{
 		if (errno == ENOTDIR)
-			ft_lstadd(lst_file, ft_lstnew(arg, ft_strlen(arg) + 1));
+			ft_lstaddend(lst_file, ft_lstnew(arg, ft_strlen(arg) + 1));
 		else
 		{
 			perror((tmp = ft_asprintf("ft_ls: %s", arg)));
@@ -68,9 +68,9 @@ static void		ft_list_dir(t_list **lst_dir, t_list **lst_file, char **tab,
 	i = 0;
 	error = 0;
 	if ((flags & FLAG_D) == FLAG_D && tab[0] == NULL)
-		ft_lstadd(lst_file, ft_lstnew(".", 2));
+		ft_lstaddend(lst_file, ft_lstnew(".", 2));
 	else if (tab[0] == NULL)
-		ft_lstadd(lst_dir, ft_lstnew(".", 2));
+		ft_lstaddend(lst_dir, ft_lstnew(".", 2));
 	while (tab[i] != NULL)
 		error += ft_check_dir(lst_dir, lst_file, tab[i++], flags);
 	if (error >= 1 && *lst_dir != NULL && (*lst_dir)->next == NULL
@@ -99,7 +99,8 @@ void			ft_manage_input(char **av, t_list **lst_dir,
 		i++;
 	}
 	tab[i] = NULL;
-	ft_selection_sort(tab);
+	if ((flags & FLAG_U) != FLAG_U)
+		ft_selection_sort(tab);
 	ft_list_dir(lst_dir, lst_file, tab, flags);
 	free(tab);
 }

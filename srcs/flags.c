@@ -33,6 +33,8 @@ static void		ft_get_flags(char *arg, uint8_t *flags)
 			*flags |= FLAG_G;
 		else if (arg[i] == 'd')
 			*flags |= FLAG_D;
+		else if (arg[i] == 'U')
+			*flags |= FLAG_U;
 		else
 		{
 			ft_putendl("ft_ls: illegal option -- -");

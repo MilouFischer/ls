@@ -39,6 +39,7 @@
 # define FLAG_R			0x10
 # define FLAG_G			0x20
 # define FLAG_D			0x40
+# define FLAG_U			0x80
 # define OTH_X			0x001
 # define OTH_W			0x002
 # define OTH_R			0x004

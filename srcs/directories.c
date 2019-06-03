@@ -75,7 +75,7 @@ void			ft_open_dir(char *path, uint8_t flags)
 		{
 			ft_get_dir_info(ft_asprintf("%s/%s", path, dirent->d_name),
 			dirent->d_name, &dir_info, &padding);
-			ft_lstadd(&lst, ft_lstnew(&dir_info, sizeof(t_dir)));
+			ft_lstaddend(&lst, ft_lstnew(&dir_info, sizeof(t_dir)));
 		}
 	}
 	ft_sort(&lst, flags);

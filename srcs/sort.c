@@ -65,6 +65,8 @@ void		ft_sort_input(t_list **lst1, t_list **lst2, t_list **head)
 
 void		ft_sort(t_list **lst, uint8_t flags)
 {
+	if ((flags & FLAG_U) == FLAG_U)
+		return ;
 	ft_merge_sort(lst, &ft_sort_name);
 	if ((flags & FLAG_T) == FLAG_T)
 		ft_merge_sort(lst, &ft_sort_time);
