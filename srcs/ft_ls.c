@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:25:57 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/31 17:08:50 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/04 17:24:02 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ static void		ft_files(t_list *lst_file, uint16_t flags)
 	while (lst_file != NULL)
 	{
 		ft_bzero(&dir_info, sizeof(dir_info));
-		ft_get_dir_info(ft_asprintf("./%s", lst_file->content),
-		lst_file->content, &dir_info, &padding);
-		ft_lstaddend(&lst, ft_lstnew(&dir_info, sizeof(dir_info)));
+		if (ft_get_dir_info(ft_strdup(lst_file->content),
+		lst_file->content, &dir_info, flags) == SUCCESS)
+		{
+			ft_get_padding(&padding, &dir_info);
+			ft_lstaddend(&lst, ft_lstnew(&dir_info, sizeof(dir_info)));
+		}
 		lst_file = lst_file->next;
 	}
 	ft_sort(&lst, flags);
@@ -45,7 +48,7 @@ int				main(int ac, char **av)
 	lst_file = NULL;
 	flags = ft_manage_args(&i, ac, av);
 	ft_manage_input(av + i, &lst_dir, &lst_file, flags);
-	if ((flags & FLAG_U) != FLAG_U)
+	if ((flags & FLAG_U) == FALSE)
 	{
 		ft_merge_sort(&lst_dir, ft_sort_input);
 		if ((flags & FLAG_REV) == FLAG_REV)

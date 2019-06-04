@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 16:09:47 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/31 17:53:44 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/04 18:06:55 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,36 @@ static t_dir	**get_arg_tab(t_list *lst, size_t *nb_arg)
 static void		ft_print_column(t_dir **tab, size_t nb_arg, t_padding *padding,
 				uint16_t flags)
 {
-	struct winsize	winsize;
-	size_t			nb_max_arg_by_line;
-	size_t			total_line;
-	size_t			nb_line;
-	size_t			i;
+	size_t	nb_max_arg_by_line;
+	size_t	total_line;
+	size_t	nb_line;
+	size_t	i;
+	char	*buf;
 
-	ioctl(0, TIOCGWINSZ, &winsize);
-	nb_max_arg_by_line = winsize.ws_col / padding->name;
-	total_line = nb_arg / nb_max_arg_by_line + 1;
+	buf = NULL;
+	total_line = 1;
+	if (tab == NULL || padding->name == 0)
+		return ;
+	nb_max_arg_by_line = padding->ws_col / padding->name;
+	if (nb_max_arg_by_line != 0)
+		total_line = nb_arg / nb_max_arg_by_line + 1;
 	nb_line = 0;
 	while (nb_line < total_line)
 	{
 		i = nb_line;
 		while (i < nb_arg)
 		{
-			if ((flags & FLAG_G) == FLAG_G)
+			if (flags & FLAG_G)
 				ft_print_color(tab[i], padding, flags);
 			else
-				ft_printf("%-*s", padding->name, tab[i]->name);
+				buf = ft_join_free(buf, ft_asprintf("%-*s", padding->name, tab[i]->name), 3);
 			i += total_line;
 		}
-		ft_putchar('\n');
+		buf = ft_join_free(buf, "\n", 1);
 		nb_line++;
 	}
+	ft_putstr(buf);
+	ft_strdel(&buf);
 }
 
 void			ft_column_display(t_list *lst, t_padding *padding,

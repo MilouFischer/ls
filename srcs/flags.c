@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:35:48 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 16:48:40 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/04 09:59:16 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		ft_get_flags(char *arg, uint16_t *flags)
 	{
 		if (arg[i] == 'l')
 			*flags |= FLAG_L;
-		else if (arg[i] == 'a')
+		else if (arg[i] == 'a' || arg[i] == 'f')
 			*flags |= FLAG_A;
 		else if (arg[i] == 'r')
 			*flags |= FLAG_REV;
@@ -33,10 +33,10 @@ static void		ft_get_flags(char *arg, uint16_t *flags)
 			*flags |= FLAG_G;
 		else if (arg[i] == 'd')
 			*flags |= FLAG_D;
-		else if (arg[i] == 'U')
+		else if (arg[i] == 'U' || arg[i] == 'f')
 			*flags |= FLAG_U;
-		else if (arg[i] == 'f')
-			*flags |= FLAG_F;
+		else if (arg[i] == '1')
+			*flags |= FLAG_1;
 		else
 		{
 			ft_putendl("ft_ls: illegal option -- -");
@@ -44,11 +44,6 @@ static void		ft_get_flags(char *arg, uint16_t *flags)
 			exit(EXIT_FAILURE);
 		}
 		i++;
-	}
-	if ((*flags & FLAG_F) == FLAG_F)
-	{
-		*flags |= FLAG_A;
-		*flags |= FLAG_U;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/31 18:30:05 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/04 18:06:26 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_LS_H
 
 # include <dirent.h>
+# include <limits.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <stdio.h>
@@ -26,10 +27,7 @@
 # include <sys/ioctl.h>
 # include "libft.h"
 
-# include <sys/sysmacros.h>
-
 # define SIX_MONTHS		15768000
-# define PATH_MAX		4096
 # define HIDE_TOTAL		0
 # define PRINT_TOTAL	1
 # define FLAG_L			0x001
@@ -40,7 +38,7 @@
 # define FLAG_G			0x020
 # define FLAG_D			0x040
 # define FLAG_U			0x080
-# define FLAG_F			0x100
+# define FLAG_1			0x100
 # define OTH_X			0x001
 # define OTH_W			0x002
 # define OTH_R			0x004
@@ -71,10 +69,12 @@ typedef	struct		s_dir
 	char			*major;
 	char			*minor;
 	char			*path;
+	char			*s_link;
 	char			mode[10];
 	char			time[13];
 	char			type;
 	int				nb_mode;
+	size_t			nb_blocks;
 	unsigned long	brut_time;
 }					t_dir;
 
@@ -89,37 +89,36 @@ typedef struct		s_padding
 	size_t			major;
 	size_t			minor;
 	size_t			total;
+	size_t			ws_col;
 }					t_padding;
 
 uint16_t			ft_manage_args(int *current_arg, int ac, char **av);
 void				ft_sort_input(t_list **lst1, t_list **lst2, t_list **head);
 void				ft_manage_input(char **av, t_list **lst_dir,
-					t_list **lst_file, uint16_t flags);
-void				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
-					t_padding *padding);
+						t_list **lst_file, uint16_t flags);
+int					ft_get_dir_info(char *path, char *name, t_dir *dir_info,
+						uint16_t flags);
 void				ft_get_time(const char *brut_tm, t_dir *dir_info);
 void				ft_get_type(int nb_mode, t_dir *dir_info);
 void				ft_get_mode(int nb_mode, t_dir *dir_info);
-void				ft_format_s_link(t_dir *dir_info, uint16_t flags);
+void				ft_get_padding(t_padding *padding, t_dir *dir_info);
+void				ft_format_s_link(t_dir *dir_info);
 void				ft_directories(t_list *lst_dir, uint16_t flags);
 void				ft_open_dir(char *path, uint16_t flags);
 void				ft_sort(t_list **lst, uint16_t flags);
-void				ft_selection_sort(char **tab);
-void				ft_merge_sort(t_list **lst, void sort(t_list**, t_list**,
-					t_list**));
 void				ft_sort_name(t_list **lst1, t_list **lst2, t_list **head);
 void				ft_sort_time(t_list **lst1, t_list **lst2, t_list **head);
 void				ft_sort_rev(t_list **lst1, t_list **lst2, t_list **head);
 void				ft_sort_name_av(t_list **lst1, t_list **lst2,
-					t_list **head);
+						t_list **head);
 void				ft_print_dir_info(t_dir *dir, t_padding *padding,
-					uint16_t flags);
+						uint16_t flags);
 void				ft_printlist(t_list *lst, t_padding *padding,
-					uint16_t flags, int print);
+						uint16_t flags, int print);
 void				ft_column_display(t_list *lst, t_padding *padding,
-					uint16_t flags);
+						uint16_t flags);
 void				ft_print_color(t_dir *dir, t_padding *padding,
-					uint16_t flags);
+						uint16_t flags);
 void				ft_free_dir_info(t_dir *dir);
 void				ft_free_struct_list(void *content, size_t content_size);
 void				ft_free_content(void *content, size_t content_size);

@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:37:23 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/31 13:57:54 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/04 18:42:45 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		ft_check_right(char *path, t_list *lst)
 		free(dir);
 		return (FALSE);
 	}
-	free(dir);
+	closedir(dir);
 	return (TRUE);
 }
 
@@ -33,24 +33,23 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint16_t flags)
 {
 	char	*tmp;
 
+	tmp = NULL;
 	while (lst != NULL)
 	{
 		if ((((t_dir*)(lst->content))->type == 'd'
-		|| (((t_dir*)(lst->content))->type == 'l'
-		&& (flags & FLAG_L) != FLAG_L))
-		&& ft_strequ(((t_dir*)(lst->content))->name, ".") == 0
-		&& ft_strequ(((t_dir*)(lst->content))->name, "..") == 0)
+			|| (((t_dir*)(lst->content))->type == 'l'
+			&& (flags & FLAG_L) != FLAG_L))
+			&& ft_strequ(((t_dir*)(lst->content))->name, ".") == 0
+			&& ft_strequ(((t_dir*)(lst->content))->name, "..") == 0)
 		{
 			ft_putchar('\n');
 			tmp = ft_asprintf("%s/%s", path, ((t_dir*)(lst->content))->name);
 			ft_printf("%s:\n", tmp);
-			if (ft_check_right(tmp, lst) == FALSE)
+			if (ft_check_right(tmp, lst) == TRUE)
 			{
-				ft_strdel(&tmp);
-				return ;
+				ft_check_right(tmp, lst);
+				ft_open_dir(tmp, flags);
 			}
-			ft_check_right(tmp, lst);
-			ft_open_dir(tmp, flags);
 			ft_strdel(&tmp);
 		}
 		lst = lst->next;
@@ -71,18 +70,26 @@ void			ft_open_dir(char *path, uint16_t flags)
 	while ((dirent = readdir(dir)) != NULL)
 	{
 		ft_bzero(&dir_info, sizeof(dir_info));
-		if (dirent->d_name[0] != '.' || (flags & FLAG_A) == FLAG_A)
+		if (dirent->d_name[0] != '.' || (flags & FLAG_A))
 		{
-			ft_get_dir_info(ft_asprintf("%s/%s", path, dirent->d_name),
-			dirent->d_name, &dir_info, &padding);
-			ft_lstaddend(&lst, ft_lstnew(&dir_info, sizeof(t_dir)));
+			if (ft_get_dir_info(ft_asprintf("%s/%s", path, dirent->d_name),
+			dirent->d_name, &dir_info, flags) == SUCCESS)
+			{
+				ft_get_padding(&padding, &dir_info);
+				ft_lstaddend(&lst, ft_lstnew(&dir_info, sizeof(t_dir)));
+			}
 		}
 	}
 	ft_sort(&lst, flags);
+	while (lst != NULL)
+	{
+		ft_putendl(((t_dir*)(lst->content))->uid);
+		lst = lst->next;
+	}
 	ft_printlist(lst, &padding, flags, PRINT_TOTAL);
 	if ((flags & FLAG_R) == FLAG_R)
 		ft_find_next_dir(path, lst, flags);
-	free(dir);
+	closedir(dir);
 	ft_lstdel(&lst, ft_free_struct_list);
 }
 

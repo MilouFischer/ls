@@ -6,7 +6,7 @@
 #    By: efischer <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/14 15:49:28 by efischer          #+#    #+#              #
-#    Updated: 2019/05/31 19:03:48 by efischer         ###   ########.fr        #
+#    Updated: 2019/06/04 10:30:11 by efischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,10 +56,10 @@ vpath %.h $(PATHI)
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(PATHO) $(OBJS) $(HEAD)
+$(NAME): $(LIBFT) $(PATHO) $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(LIBFT) -o $@
 
-$(OBJS): $(PATHO)%.o: %.c
+$(OBJS): $(PATHO)%.o: %.c $(HEAD) Makefile
 	$(COMPILE) $(CFLAGS) $< $(IFLAGS) $(INCLUDES) $(IFLAGS) $(LIBINCLUDES) -o $@
 
 $(LIBFT): FORCE
