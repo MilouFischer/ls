@@ -59,8 +59,6 @@ void		ft_print_color(t_dir *dir, t_padding *padding, uint16_t flags)
 	ft_strdel(&tmp);
 }
 
-#include <assert.h>
-
 void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint16_t flags)
 {
 	if ((flags & FLAG_A) == FALSE && dir->name[0] == '.'
@@ -73,14 +71,13 @@ void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint16_t flags)
 		dir->gid, padding->major, dir->major, padding->minor, dir->minor,
 		dir->time);
 	}
-/*	else
+	else
 	{
 		ft_printf("%c%s %*s %-*s %-*s%*s %s ", dir->type, dir->mode,
 		padding->link, dir->link, padding->uid, dir->uid,	padding->gid,
 		dir->gid, padding->size, dir->size, dir->time);
-		//assert(dir->uid == NULL);
 	}
-*/	if (flags & FLAG_G)
+	if (flags & FLAG_G)
 		ft_print_color(dir, padding, flags);
 	else
 		ft_putstr(dir->name);

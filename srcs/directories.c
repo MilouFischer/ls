@@ -43,7 +43,10 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint16_t flags)
 			&& ft_strequ(((t_dir*)(lst->content))->name, "..") == 0)
 		{
 			ft_putchar('\n');
-			tmp = ft_asprintf("%s/%s", path, ((t_dir*)(lst->content))->name);
+			if (ft_strequ(path, "/") == TRUE)
+				tmp = ft_strjoin(path, ((t_dir*)(lst->content))->name);
+			else
+				tmp = ft_asprintf("%s/%s", path, ((t_dir*)(lst->content))->name);
 			ft_printf("%s:\n", tmp);
 			if (ft_check_right(tmp, lst) == TRUE)
 			{
@@ -72,8 +75,8 @@ void			ft_open_dir(char *path, uint16_t flags)
 		ft_bzero(&dir_info, sizeof(dir_info));
 		if (dirent->d_name[0] != '.' || (flags & FLAG_A))
 		{
-			if (ft_get_dir_info(ft_asprintf("%s/%s", path, dirent->d_name),
-			dirent->d_name, &dir_info, flags) == SUCCESS)
+			if (ft_get_dir_info(path, dirent->d_name, &dir_info, flags)
+				== SUCCESS)
 			{
 				ft_get_padding(&padding, &dir_info);
 				ft_lstaddend(&lst, ft_lstnew(&dir_info, sizeof(t_dir)));
@@ -81,11 +84,6 @@ void			ft_open_dir(char *path, uint16_t flags)
 		}
 	}
 	ft_sort(&lst, flags);
-	while (lst != NULL)
-	{
-		ft_putendl(((t_dir*)(lst->content))->uid);
-		lst = lst->next;
-	}
 	ft_printlist(lst, &padding, flags, PRINT_TOTAL);
 	if ((flags & FLAG_R) == FLAG_R)
 		ft_find_next_dir(path, lst, flags);

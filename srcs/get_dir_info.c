@@ -89,6 +89,10 @@ int				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 {
 	struct stat		stat;
 
+	if (ft_strequ(path, "/") == TRUE)
+		path = ft_strjoin(path, name);
+	else
+		path = ft_asprintf("%s/%s", path, name);
 	if ((lstat(path, &stat)) == FAILURE)
 	{
 		perror("lstat");

@@ -27,6 +27,8 @@
 # include <sys/ioctl.h>
 # include "libft.h"
 
+# include <sys/sysmacros.h>
+
 # define SIX_MONTHS		15768000
 # define HIDE_TOTAL		0
 # define PRINT_TOTAL	1
