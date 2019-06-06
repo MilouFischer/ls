@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:28:53 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 17:02:00 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 17:39:05 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint16_t flags)
 {
 	char	*tmp;
 
+	(void)path;
 	tmp = NULL;
 	while (lst != NULL)
 	{

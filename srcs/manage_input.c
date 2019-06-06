@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:25 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 16:53:49 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 17:41:15 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void		ft_put_dir_in_list(t_list **lst_dir, t_list **lst_file,
 {
 	t_dir		dir_info;
 	t_padding	padding;
-	char		*tmp;
 
 	ft_bzero(&dir_info, sizeof(dir_info));
 	ft_bzero(&padding, sizeof(padding));
@@ -25,12 +24,6 @@ static void		ft_put_dir_in_list(t_list **lst_dir, t_list **lst_file,
 	if (((flags & FLAG_L) == FLAG_L && dir_info.type == 'l')
 		|| (flags & FLAG_D) == FLAG_D)
 		ft_lstaddend(lst_file, ft_lstnew(arg, ft_strlen(arg) + 1));
-	else if (arg[ft_strlen(arg) - 1] == '/' && ft_strlen(arg) > 1)
-	{
-		tmp = ft_strndup(arg, ft_strlen(arg) - 1);
-		ft_lstaddend(lst_dir, ft_lstnew(tmp, ft_strlen(tmp) + 1));
-		ft_strdel(&tmp);
-	}
 	else
 		ft_lstaddend(lst_dir, ft_lstnew(arg, ft_strlen(arg) + 1));
 	ft_free_dir_info(&dir_info);
