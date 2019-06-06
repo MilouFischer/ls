@@ -6,11 +6,11 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:29 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 15:29:30 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 15:59:15 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "mode_time.h"
 
 static void		ft_get_mode_x(int nb_mode, t_dir *dir_info)
 {

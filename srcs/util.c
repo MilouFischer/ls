@@ -6,11 +6,11 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:39 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 15:29:41 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 16:12:37 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "util.h"
 
 void		ft_free_dir_info(t_dir *dir)
 {

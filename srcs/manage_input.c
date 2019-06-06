@@ -6,11 +6,11 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:25 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 15:29:27 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 15:56:43 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "manage_input.h"
 
 static void		ft_put_dir_in_list(t_list **lst_dir, t_list **lst_file,
 				char *arg, uint16_t flags)

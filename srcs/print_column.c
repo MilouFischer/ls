@@ -6,11 +6,11 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:32 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 15:29:34 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 16:01:36 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "print_column.h"
 
 static size_t	ft_lstlen(t_list *lst)
 {

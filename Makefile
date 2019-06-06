@@ -6,7 +6,7 @@
 #    By: efischer <efischer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/06 15:29:44 by efischer          #+#    #+#              #
-#    Updated: 2019/06/06 15:29:46 by efischer         ###   ########.fr        #
+#    Updated: 2019/06/06 16:39:01 by efischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,15 @@ NAME = ft_ls
 INCLUDES += includes/
 LIBINCLUDES += libft/includes/
 HEAD += ft_ls.h
+#HEAD += struct.h
+HEAD += directories.h
+HEAD += flags.h
+HEAD += get_dir_info.h
+HEAD += manage_input.h
+HEAD += mode_time.h
+HEAD += print_column.h
+HEAD += ft_sort.h
+HEAD += util.h
 IFLAGS += -I
 
 #=====================================PATH======================================

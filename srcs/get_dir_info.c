@@ -6,11 +6,11 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:21 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 15:29:22 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 15:55:17 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "get_dir_info.h"
 
 void			ft_format_s_link(t_dir *dir_info)
 {
