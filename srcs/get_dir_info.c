@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:22 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 13:54:55 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 14:06:23 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,10 @@ int				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 
 	if (ft_strequ(path, "/") == TRUE)
 		path = ft_strjoin(path, name);
-	else if (name != NULL)
+	else if (path != NULL)
 		path = ft_asprintf("%s/%s", path, name);
+	else
+		path = ft_strdup(name);
 	if ((lstat(path, &stat)) == FAILURE)
 	{
 		perror("lstat");

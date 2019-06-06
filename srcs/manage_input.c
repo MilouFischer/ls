@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:40:36 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 10:57:29 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 15:09:28 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		ft_put_dir_in_list(t_list **lst_dir, t_list **lst_file,
 
 	ft_bzero(&dir_info, sizeof(dir_info));
 	ft_bzero(&padding, sizeof(padding));
-	ft_get_dir_info(ft_strdup(arg), NULL, &dir_info, flags);
+	ft_get_dir_info(NULL, arg, &dir_info, flags);
 	if (((flags & FLAG_L) == FLAG_L && dir_info.type == 'l')
 		|| (flags & FLAG_D) == FLAG_D)
 		ft_lstaddend(lst_file, ft_lstnew(arg, ft_strlen(arg) + 1));
@@ -101,7 +101,7 @@ void			ft_manage_input(char **av, t_list **lst_dir,
 		i++;
 	}
 	tab[i] = NULL;
-	if ((flags & FLAG_U) != FLAG_U)
+	if ((flags & FLAG_F) == FALSE)
 		ft_selection_sort(tab);
 	ft_list_dir(lst_dir, lst_file, tab, flags);
 	free(tab);

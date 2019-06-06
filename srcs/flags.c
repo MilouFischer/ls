@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:35:48 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/04 09:59:16 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 15:07:34 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,24 @@ static void		ft_get_flags(char *arg, uint16_t *flags)
 			*flags |= FLAG_L;
 		else if (arg[i] == 'a' || arg[i] == 'f')
 			*flags |= FLAG_A;
-		else if (arg[i] == 'r')
+		else if (arg[i] == 'r' && (*flags & FLAG_F) == FALSE)
 			*flags |= FLAG_REV;
 		else if (arg[i] == 'R')
 			*flags |= FLAG_R;
-		else if (arg[i] == 't')
+		else if (arg[i] == 't' && (*flags & FLAG_F) == FALSE)
 			*flags |= FLAG_T;
 		else if (arg[i] == 'G')
 			*flags |= FLAG_G;
 		else if (arg[i] == 'd')
 			*flags |= FLAG_D;
-		else if (arg[i] == 'U' || arg[i] == 'f')
-			*flags |= FLAG_U;
 		else if (arg[i] == '1')
 			*flags |= FLAG_1;
+		else if (arg[i] == 'f')
+		{
+			*flags |= FLAG_F;
+			*flags &= FLAG_REV;
+			*flags &= FLAG_T;
+		}
 		else
 		{
 			ft_putendl("ft_ls: illegal option -- -");

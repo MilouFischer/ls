@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:46 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/24 16:47:13 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 15:01:56 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		ft_sort_input(t_list **lst1, t_list **lst2, t_list **head)
 
 void		ft_sort(t_list **lst, uint16_t flags)
 {
-	if ((flags & FLAG_U) == FLAG_U)
+	if ((flags & FLAG_F))
 		return ;
 	ft_merge_sort(lst, &ft_sort_name);
 	if ((flags & FLAG_T) == FLAG_T)

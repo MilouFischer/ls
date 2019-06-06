@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:56 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 13:37:18 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 14:22:28 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,36 @@ void		ft_free_struct_list(void *content, size_t content_size)
 	free(content);
 }
 
-void		ft_print_color(t_dir *dir, t_padding *padding, uint16_t flags)
+char		*ft_print_color(t_dir *dir, t_padding *padding, uint16_t flags)
 {
-	char	*tmp;
+	char	*out;
 
-	tmp = ft_strdup(dir->name);
+	out = ft_strdup(dir->name);
 	if (dir->type == 'b')
-		tmp = ft_join_free("\033[46;34m", tmp, 2);
+		out = ft_join_free("\033[46;34m", out, 2);
 	else if (dir->type == 'c')
-		tmp = ft_join_free("\033[43;34m", tmp, 2);
+		out = ft_join_free("\033[43;34m", out, 2);
 	else if (dir->type == 'd')
-		tmp = ft_join_free("\033[1;36m", tmp, 2);
+		out = ft_join_free("\033[1;36m", out, 2);
 	else if (dir->type == 'l')
-		tmp = ft_join_free("\033[35m", tmp, 2);
+		out = ft_join_free("\033[35m", out, 2);
 	else if (dir->type == 'p')
-		tmp = ft_join_free("\033[43m", tmp, 2);
+		out = ft_join_free("\033[43m", out, 2);
 	else if (dir->type == 's')
-		tmp = ft_join_free("\033[1;35m", tmp, 2);
+		out = ft_join_free("\033[1;35m", out, 2);
 	else if ((dir->nb_mode & USR_X) == USR_X || (dir->nb_mode & GRP_X) == GRP_X
 			|| (dir->nb_mode & OTH_X) == OTH_X)
-		tmp = ft_join_free("\033[31m", tmp, 2);
-	tmp = ft_join_free(tmp, "\033[0m", 1);
-	ft_putstr(tmp);
+		out = ft_join_free("\033[31m", out, 2);
+	out = ft_join_free(out, "\033[0m", 1);
 	if ((flags & FLAG_L) == FALSE && (flags & FLAG_1) == FALSE)
-		ft_printf("%*s", padding->name - ft_strlen(dir->name), " ");
-	ft_strdel(&tmp);
+		out = ft_join_free(out, ft_asprintf("%*s", padding->name - ft_strlen(dir->name), " "), 3);
+	return (out);
 }
 
 void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint16_t flags)
 {
+	char	*out;
+
 	if ((flags & FLAG_A) == FALSE && dir->name[0] == '.'
 		&& ft_strchr(dir->name, '/') == NULL)
 		return ;
@@ -80,7 +81,11 @@ void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint16_t flags)
 		dir->gid, padding->size, dir->size, dir->time);
 	}
 	if (flags & FLAG_G)
-		ft_print_color(dir, padding, flags);
+	{
+		out = ft_print_color(dir, padding, flags);
+		ft_putstr(out);
+		ft_strdel(&out);
+	}
 	else
 		ft_putstr(dir->name);
 	if (dir->type == 'l' && (flags & FLAG_L))

@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 17:25:57 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 10:49:33 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 15:03:14 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void		ft_files(t_list *lst_file, uint16_t flags)
 	while (lst_file != NULL)
 	{
 		ft_bzero(&dir_info, sizeof(dir_info));
-		if (ft_get_dir_info(ft_strdup(lst_file->content),
-		lst_file->content, &dir_info, flags) == SUCCESS)
+		if (ft_get_dir_info(NULL, lst_file->content, &dir_info, flags)
+				== SUCCESS)
 		{
 			ft_get_padding(&padding, &dir_info);
 			ft_lstaddend(&lst, ft_lstnew(&dir_info, sizeof(dir_info)));
@@ -48,7 +48,7 @@ int				main(int ac, char **av)
 	lst_file = NULL;
 	flags = ft_manage_args(&i, ac, av);
 	ft_manage_input(av + i, &lst_dir, &lst_file, flags);
-	if ((flags & FLAG_U) == FALSE)
+	if ((flags & FLAG_F) == FALSE)
 	{
 		ft_merge_sort(&lst_dir, ft_sort_input);
 		if ((flags & FLAG_REV) == FLAG_REV)

@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 16:09:47 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/04 18:06:55 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 14:19:18 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void		ft_print_column(t_dir **tab, size_t nb_arg, t_padding *padding,
 		while (i < nb_arg)
 		{
 			if (flags & FLAG_G)
-				ft_print_color(tab[i], padding, flags);
+				buf = ft_join_free(buf, ft_print_color(tab[i], padding, flags), 3);
 			else
 				buf = ft_join_free(buf, ft_asprintf("%-*s", padding->name, tab[i]->name), 3);
 			i += total_line;

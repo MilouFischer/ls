@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 13:56:25 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 14:51:54 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define FLAG_R			0x010
 # define FLAG_G			0x020
 # define FLAG_D			0x040
-# define FLAG_U			0x080
+# define FLAG_F			0x080
 # define FLAG_1			0x100
 # define OTH_X			0x001
 # define OTH_W			0x002
@@ -117,7 +117,7 @@ void				ft_printlist(t_list *lst, t_padding *padding,
 						uint16_t flags, int print);
 void				ft_column_display(t_list *lst, t_padding *padding,
 						uint16_t flags);
-void				ft_print_color(t_dir *dir, t_padding *padding,
+char				*ft_print_color(t_dir *dir, t_padding *padding,
 						uint16_t flags);
 void				ft_free_dir_info(t_dir *dir);
 void				ft_free_struct_list(void *content, size_t content_size);
