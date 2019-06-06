@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:21 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 15:55:17 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 17:00:24 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 				uint16_t flags)
 {
 	struct stat		stat;
+	char			*tmp;
 
 	if (ft_strequ(path, "/") == TRUE)
 		path = ft_strjoin(path, name);
@@ -103,7 +104,8 @@ int				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 		path = ft_strdup(name);
 	if ((lstat(path, &stat)) == FAILURE)
 	{
-		perror("lstat");
+		perror((tmp = ft_asprintf("ft_ls: %s", path)));
+		ft_strdel(&tmp);
 		return (FAILURE);
 	}
 	ft_get_main_info(dir_info, name, path, stat);

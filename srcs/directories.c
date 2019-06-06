@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:28:53 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 15:49:17 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 17:02:00 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void			ft_open_dir(char *path, uint16_t flags)
 				ft_get_padding(&padding, &dir_info);
 				ft_lstaddend(&lst, ft_lstnew(&dir_info, sizeof(t_dir)));
 			}
+			else
+				return ;
 		}
 	}
 	ft_sort(&lst, flags);

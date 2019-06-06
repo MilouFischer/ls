@@ -6,13 +6,13 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:15 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 15:29:18 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 17:07:53 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		ft_files(t_list *lst_file, uint16_t flags)
+static int			ft_files(t_list *lst_file, uint16_t flags)
 {
 	t_dir		dir_info;
 	t_padding	padding;
@@ -29,11 +29,14 @@ static void		ft_files(t_list *lst_file, uint16_t flags)
 			ft_get_padding(&padding, &dir_info);
 			ft_lstaddend(&lst, ft_lstnew(&dir_info, sizeof(dir_info)));
 		}
+		else
+			return (FAILURE);
 		lst_file = lst_file->next;
 	}
 	ft_sort(&lst, flags);
 	ft_printlist(lst, &padding, flags, HIDE_TOTAL);
 	ft_lstdel(&lst, ft_free_struct_list);
+	return (SUCCESS);
 }
 
 int				main(int ac, char **av)
@@ -56,11 +59,13 @@ int				main(int ac, char **av)
 	}
 	if (lst_file != NULL)
 	{
-		ft_files(lst_file, flags);
-		if (lst_dir != NULL && lst_dir->next == NULL)
-			ft_printf("\n%s:\n", lst_dir->content);
-		else if (lst_dir != NULL)
-			ft_putchar('\n');
+		if (ft_files(lst_file, flags) == SUCCESS)
+		{
+			if (lst_dir != NULL && lst_dir->next == NULL)
+				ft_printf("\n%s:\n", lst_dir->content);
+			else if (lst_dir != NULL)
+				ft_putchar('\n');
+		}
 	}
 	ft_directories(lst_dir, flags);
 	ft_lstdel(&lst_file, ft_free_content);

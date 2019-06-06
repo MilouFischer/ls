@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:10 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 16:42:08 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 16:53:03 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void		ft_get_flags(char *arg, uint16_t *flags)
 		}
 		else
 		{
-			ft_putendl("ft_ls: illegal option -- -"); //// MISS CHAR
-			ft_putendl("usage: ft_ls [-Ralrt] [file ...]");
+			ft_printf("ft_ls: illegal option -- %c\n", arg[i]);
+			ft_putendl("usage: ft_ls [-GRadflrt1] [file ...]");
 			exit(EXIT_FAILURE);
 		}
 		i++;
