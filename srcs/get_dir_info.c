@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:21 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 17:00:24 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 18:25:30 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 	{
 		perror((tmp = ft_asprintf("ft_ls: %s", path)));
 		ft_strdel(&tmp);
+		ft_strdel(&path);
 		return (FAILURE);
 	}
 	ft_get_main_info(dir_info, name, path, stat);
