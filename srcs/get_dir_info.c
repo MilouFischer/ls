@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:19:22 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/04 18:38:05 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 13:54:55 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void			ft_get_main_info(t_dir *dir_info, char *name, char *path, struct stat sta
 	dir_info->nb_mode = stat.st_mode;
 	ft_get_type(stat.st_mode, dir_info);
 	ft_get_mode(stat.st_mode, dir_info);
-	ft_get_time(ctime(&stat.st_mtime), dir_info);
 	dir_info->brut_time = stat.st_mtime;
+	ft_get_time(ctime(&stat.st_mtime), dir_info);
 	dir_info->nb_blocks = stat.st_blocks;
 }
 
@@ -80,8 +80,14 @@ void			ft_get_other_info(t_dir *dir_info, struct stat stat)
 	dir_info->major = ft_itoa(major(stat.st_rdev));
 	dir_info->minor = ft_itoa(minor(stat.st_rdev));
 	dir_info->link = ft_itoa(stat.st_nlink);
-	dir_info->uid = usr->pw_name;
-	dir_info->gid = grp->gr_name;
+	if (usr != NULL)
+		dir_info->uid = ft_strdup(usr->pw_name);
+	else
+		dir_info->uid = ft_itoa(stat.st_uid);
+	if (grp != NULL)
+		dir_info->gid = ft_strdup(grp->gr_name);
+	else
+		dir_info->gid = ft_itoa(stat.st_gid);
 }
 
 int				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
@@ -91,7 +97,7 @@ int				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 
 	if (ft_strequ(path, "/") == TRUE)
 		path = ft_strjoin(path, name);
-	else
+	else if (name != NULL)
 		path = ft_asprintf("%s/%s", path, name);
 	if ((lstat(path, &stat)) == FAILURE)
 	{

@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 15:49:25 by efischer          #+#    #+#             */
-/*   Updated: 2019/05/29 15:51:51 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 13:57:16 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,16 @@ void			ft_get_type(int nb_mode, t_dir *dir_info)
 
 static void		ft_time_or_year(char **tab, size_t i, t_dir *dir_info)
 {
-	size_t	j;
+	int64_t		actual_time;
+	size_t		j;
 
 	j = 0;
-	if (time(NULL) - dir_info->brut_time < SIX_MONTHS)
+	if ((actual_time = time(NULL)) == (time_t)FAILURE)
+	{
+		ft_memset(dir_info->time, 13, 0);
+		return ;
+	}
+	if (actual_time - dir_info->brut_time < SIX_MONTHS)
 	{
 		while (i < 12)
 			dir_info->time[i++] = tab[3][j++];

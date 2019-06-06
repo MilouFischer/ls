@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 18:02:43 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/04 18:06:26 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 13:56:25 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # include <stdint.h>
 # include <sys/ioctl.h>
 # include "libft.h"
-
-# include <sys/sysmacros.h>
 
 # define SIX_MONTHS		15768000
 # define HIDE_TOTAL		0
@@ -63,21 +61,21 @@
 
 typedef	struct		s_dir
 {
-	char			*size;
-	char			*name;
-	char			*uid;
-	char			*gid;
-	char			*link;
-	char			*major;
-	char			*minor;
-	char			*path;
-	char			*s_link;
-	char			mode[10];
-	char			time[13];
-	char			type;
-	int				nb_mode;
-	size_t			nb_blocks;
-	unsigned long	brut_time;
+	char		*size;
+	char		*name;
+	char		*uid;
+	char		*gid;
+	char		*link;
+	char		*major;
+	char		*minor;
+	char		*path;
+	char		*s_link;
+	char		mode[10];
+	char		time[13];
+	char		type;
+	int			nb_mode;
+	size_t		nb_blocks;
+	int64_t		brut_time;
 }					t_dir;
 
 typedef struct		s_padding

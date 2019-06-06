@@ -6,7 +6,7 @@
 /*   By: efischer <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:37:23 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/04 18:42:45 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 10:55:58 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void			ft_open_dir(char *path, uint16_t flags)
 	while ((dirent = readdir(dir)) != NULL)
 	{
 		ft_bzero(&dir_info, sizeof(dir_info));
-		if (dirent->d_name[0] != '.' || (flags & FLAG_A))
+		if ((dirent->d_name[0] != '.' || (flags & FLAG_A)))
 		{
 			if (ft_get_dir_info(path, dirent->d_name, &dir_info, flags)
 				== SUCCESS)
