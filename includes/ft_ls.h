@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:28:16 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 16:39:09 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 18:19:54 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,15 @@
 # include <stdint.h>
 # include <sys/ioctl.h>
 # include "libft.h"
-//# include "struct.h"
+# include "struct.h"
+# include "directories.h"
+# include "flags.h"
+# include "get_dir_info.h"
+# include "manage_input.h"
+# include "mode_time.h"
+# include "print_column.h"
+# include "sort_list.h"
+# include "util.h"
 
 # define SIX_MONTHS		15768000
 # define HIDE_TOTAL		0
@@ -68,47 +76,5 @@
 # define TYPE_F			0x8
 # define TYPE_L			0xA
 # define TYPE_S			0xC
-
-typedef	struct		s_dir
-{
-	char		*size;
-	char		*name;
-	char		*uid;
-	char		*gid;
-	char		*link;
-	char		*major;
-	char		*minor;
-	char		*path;
-	char		*s_link;
-	char		mode[10];
-	char		time[13];
-	char		type;
-	int			nb_mode;
-	size_t		nb_blocks;
-	int64_t		brut_time;
-}					t_dir;
-
-typedef struct		s_padding
-{
-	size_t			size;
-	size_t			name;
-	size_t			uid;
-	size_t			gid;
-	size_t			link;
-	size_t			type;
-	size_t			major;
-	size_t			minor;
-	size_t			total;
-	size_t			ws_col;
-}					t_padding;
-
-# include "directories.h"
-# include "flags.h"
-# include "get_dir_info.h"
-# include "manage_input.h"
-# include "mode_time.h"
-# include "print_column.h"
-# include "ft_sort.h"
-# include "util.h"
 
 #endif

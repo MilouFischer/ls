@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:29 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 15:59:15 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 18:19:53 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,15 @@ static void		ft_get_mode_x(int nb_mode, t_dir *dir_info)
 		dir_info->mode[8] = 'T';
 	if ((nb_mode & GRP_X) == GRP_X)
 		dir_info->mode[5] = 'x';
-	if ((nb_mode & GRP_X) == GRP_X && ((nb_mode & SET_UID) == SET_UID
-		|| (nb_mode & SET_GID) == SET_GID))
+	if ((nb_mode & GRP_X) == GRP_X && (nb_mode & SET_GID))
 		dir_info->mode[5] = 's';
-	if ((nb_mode & GRP_X) != GRP_X && ((nb_mode & SET_UID) == SET_UID
-		|| (nb_mode & SET_GID) == SET_GID))
+	if ((nb_mode & GRP_X) != GRP_X && (nb_mode & SET_GID))
 		dir_info->mode[5] = 'S';
 	if ((nb_mode & USR_X) == USR_X)
 		dir_info->mode[2] = 'x';
-	if ((nb_mode & USR_X) == USR_X && ((nb_mode & SET_UID) == SET_UID
-		|| (nb_mode & SET_GID) == SET_GID))
+	if ((nb_mode & USR_X) == USR_X && (nb_mode & SET_UID))
 		dir_info->mode[2] = 's';
-	if ((nb_mode & USR_X) != USR_X && ((nb_mode & SET_UID) == SET_UID
-		|| (nb_mode & SET_GID) == SET_GID))
+	if ((nb_mode & USR_X) != USR_X && (nb_mode & SET_UID))
 		dir_info->mode[2] = 'S';
 }
 

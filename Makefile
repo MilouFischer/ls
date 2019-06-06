@@ -6,7 +6,7 @@
 #    By: efischer <efischer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/06 15:29:44 by efischer          #+#    #+#              #
-#    Updated: 2019/06/06 16:39:01 by efischer         ###   ########.fr        #
+#    Updated: 2019/06/06 17:54:25 by efischer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ HEAD += get_dir_info.h
 HEAD += manage_input.h
 HEAD += mode_time.h
 HEAD += print_column.h
-HEAD += ft_sort.h
+HEAD += sort_list.h
 HEAD += util.h
 IFLAGS += -I
 
