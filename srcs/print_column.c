@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:32 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 18:41:41 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/06 18:45:34 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		ft_print_column(t_dir **tab, size_t nb_arg, t_padding *padding,
 		return ;
 	nb_max_arg_by_line = padding->ws_col / padding->name;
 	if (nb_max_arg_by_line != 0)
-		total_line = nb_arg / nb_max_arg_by_line + 0.5;
+		total_line = nb_arg / nb_max_arg_by_line + 1;
 	nb_line = 0;
 	while (nb_line < total_line)
 	{

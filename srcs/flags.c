@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:10 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 16:53:03 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/07 16:31:30 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,31 @@
 
 static void		ft_get_flags(char *arg, uint16_t *flags)
 {
-	size_t	i;
-
-	i = 0;
-	while (arg[i] != '\0')
+	while (*arg != '\0')
 	{
-		if (arg[i] == 'l')
+		if (*arg == 'l')
 			*flags |= FLAG_L;
-		else if (arg[i] == 'a' || arg[i] == 'f')
+		else if (*arg == 'a')
 			*flags |= FLAG_A;
-		else if (arg[i] == 'r' && (*flags & FLAG_F) == FALSE)
+		else if (*arg == 'r')
 			*flags |= FLAG_REV;
-		else if (arg[i] == 'R')
+		else if (*arg == 'R')
 			*flags |= FLAG_R;
-		else if (arg[i] == 't' && (*flags & FLAG_F) == FALSE)
+		else if (*arg == 't')
 			*flags |= FLAG_T;
-		else if (arg[i] == 'G')
+		else if (*arg == 'G')
 			*flags |= FLAG_G;
-		else if (arg[i] == 'd')
+		else if (*arg == 'd')
 			*flags |= FLAG_D;
-		else if (arg[i] == '1')
+		else if (*arg == '1')
 			*flags |= FLAG_1;
-		else if (arg[i] == 'f')
-		{
-			*flags |= FLAG_F;
-			*flags &= FLAG_REV;
-			*flags &= FLAG_T;
-		}
 		else
 		{
-			ft_printf("ft_ls: illegal option -- %c\n", arg[i]);
-			ft_putendl("usage: ft_ls [-GRadflrt1] [file ...]");
+			ft_printf("ft_ls: illegal option -- %c\n", *arg);
+			ft_putendl("usage: ft_ls [-GRadlrt1] [file ...]");
 			exit(EXIT_FAILURE);
 		}
-		i++;
+		arg++;
 	}
 }
 

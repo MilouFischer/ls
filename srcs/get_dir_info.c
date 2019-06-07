@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:21 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 18:25:30 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/07 16:12:17 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,10 @@ void			ft_get_padding(t_padding *padding, t_dir *dir_info)
 	padding->total += dir_info->nb_blocks;
 	if (padding->major != 0 || padding->minor != 0)
 	{
-		if (padding->size < padding->major + padding->minor + 1)
-			padding->size = padding->major + padding->minor + 1;
-		else
-		{
-			padding->major += padding->size
-				- (padding->major + padding->minor + 1);
-		}
+		if (padding->size < padding->major + padding->minor)
+			padding->size = padding->major + padding->minor;
+		else 
+			padding->major = padding->size - padding->minor;
 	}
 }
 

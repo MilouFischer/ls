@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:39 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 16:12:37 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/07 15:29:55 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		ft_print_dir_info(t_dir *dir, t_padding *padding, uint16_t flags)
 		return ;
 	if (dir->type == 'c' || dir->type == 'b')
 	{
-		ft_printf("%c%s %*s %-*s %-*s%*s,%*s %s ", dir->type, dir->mode,
+		ft_printf("%c%s %*s %-*s %-*s %*s,%*s %s ", dir->type, dir->mode,
 		padding->link, dir->link, padding->uid, dir->uid, padding->gid,
 		dir->gid, padding->major, dir->major, padding->minor, dir->minor,
 		dir->time);

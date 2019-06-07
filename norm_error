@@ -1,0 +1,25 @@
+Norme: ./srcs/flags.c
+Error (line 15): function ft_get_flags has 26 lines
+Norme: ./srcs/ft_ls.c
+Norme: ./srcs/directories.c
+Error (line 32): function ft_find_next_dir has 27 lines
+Error (line 50): line has 82 characters
+Error (line 63): function ft_open_dir has 30 lines
+Norme: ./srcs/get_dir_info.c
+Error: 6 functions in the file
+Error (line 52): spaces at the end of line
+Error (line 57): line has 92 characters
+Norme: ./srcs/manage_input.c
+Norme: ./srcs/sort.c
+Norme: ./srcs/print_column.c
+Error (line 47): function ft_print_column has 30 lines
+Error (line 70): line has 84 characters
+Error (line 72): line has 94 characters
+Norme: ./srcs/mode_time.c
+Norme: ./srcs/util.c
+Error: 6 functions in the file
+Error (line 59): line has 99 characters
+Error (line 63): function ft_print_dir_info has 28 lines
+Error (line 80, col 50): bad character after ,
+Error (line 107): declarations must be followed by one empty line in ft_printlist
+Error (line 111): spaces at the end of line

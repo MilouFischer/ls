@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:25 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 17:41:15 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/07 16:17:41 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,7 @@ void			ft_manage_input(char **av, t_list **lst_dir,
 		i++;
 	}
 	tab[i] = NULL;
-	if ((flags & FLAG_F) == FALSE)
-		ft_selection_sort(tab);
+	ft_selection_sort(tab);
 	ft_list_dir(lst_dir, lst_file, tab, flags);
 	free(tab);
 }

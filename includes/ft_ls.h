@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:28:16 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 18:19:54 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/07 16:17:12 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@
 # define HIDE_TOTAL		0
 # define PRINT_TOTAL	1
 
-///////////////////////////////////////FLAG/////////////////////////////////////
-
 # define FLAG_L			0x001
 # define FLAG_A			0x002
 # define FLAG_REV		0x004
@@ -49,10 +47,7 @@
 # define FLAG_R			0x010
 # define FLAG_G			0x020
 # define FLAG_D			0x040
-# define FLAG_F			0x080
-# define FLAG_1			0x100
-
-///////////////////////////////////////MODE/////////////////////////////////////
+# define FLAG_1			0x080
 
 # define OTH_X			0x001
 # define OTH_W			0x002
@@ -66,8 +61,6 @@
 # define STICKY_BIT		0x200
 # define SET_GID		0x400
 # define SET_UID		0x800
-
-///////////////////////////////////////TYPE/////////////////////////////////////
 
 # define TYPE_P			0x1
 # define TYPE_C			0x2
