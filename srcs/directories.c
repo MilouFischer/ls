@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:28:53 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 17:39:05 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/08 12:17:10 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint16_t flags)
 {
 	char	*tmp;
 
-	(void)path;
-	tmp = NULL;
 	while (lst != NULL)
 	{
 		if ((((t_dir*)(lst->content))->type == 'd'
@@ -47,30 +45,29 @@ static void		ft_find_next_dir(char *path, t_list *lst, uint16_t flags)
 			if (ft_strequ(path, "/") == TRUE)
 				tmp = ft_strjoin(path, ((t_dir*)(lst->content))->name);
 			else
-				tmp = ft_asprintf("%s/%s", path, ((t_dir*)(lst->content))->name);
+			{
+				tmp = ft_asprintf("%s/%s", path,
+						((t_dir*)(lst->content))->name);
+			}
 			ft_printf("%s:\n", tmp);
 			if (ft_check_right(tmp, lst) == TRUE)
-			{
-				ft_check_right(tmp, lst);
 				ft_open_dir(tmp, flags);
-			}
 			ft_strdel(&tmp);
 		}
 		lst = lst->next;
 	}
 }
 
-void			ft_open_dir(char *path, uint16_t flags)
+static int		ft_browse_dir(t_list **lst, t_padding *padding, char *path,
+				uint16_t flags)
 {
 	void			*dir;
 	struct dirent	*dirent;
 	t_dir			dir_info;
-	t_padding		padding;
-	t_list			*lst;
 
-	lst = NULL;
 	dir = opendir(path);
-	ft_bzero(&padding, sizeof(padding));
+	if (dir == NULL)
+		return (FAILURE);
 	while ((dirent = readdir(dir)) != NULL)
 	{
 		ft_bzero(&dir_info, sizeof(dir_info));
@@ -79,18 +76,30 @@ void			ft_open_dir(char *path, uint16_t flags)
 			if (ft_get_dir_info(path, dirent->d_name, &dir_info, flags)
 				== SUCCESS)
 			{
-				ft_get_padding(&padding, &dir_info);
-				ft_lstaddend(&lst, ft_lstnew(&dir_info, sizeof(t_dir)));
+				ft_get_padding(padding, &dir_info);
+				ft_lstaddend(lst, ft_lstnew(&dir_info, sizeof(t_dir)));
 			}
 			else
-				return ;
+				return (FAILURE);
 		}
 	}
+	closedir(dir);
+	return (SUCCESS);
+}
+
+void			ft_open_dir(char *path, uint16_t flags)
+{
+	t_padding		padding;
+	t_list			*lst;
+
+	lst = NULL;
+	ft_bzero(&padding, sizeof(padding));
+	if (ft_browse_dir(&lst, &padding, path, flags) == FAILURE)
+		return ;
 	ft_sort(&lst, flags);
 	ft_printlist(lst, &padding, flags, PRINT_TOTAL);
 	if ((flags & FLAG_R) == FLAG_R)
 		ft_find_next_dir(path, lst, flags);
-	closedir(dir);
 	ft_lstdel(&lst, ft_free_struct_list);
 }
 
