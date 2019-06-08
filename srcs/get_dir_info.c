@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:21 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/08 13:15:24 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/08 14:56:27 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void			ft_get_main_info(t_dir *dir_info, char *name, char *path,
 	dir_info->nb_blocks = stat.st_blocks;
 }
 
-void			ft_get_other_info(t_dir *dir_info, struct stat stat)
+void			ft_get_other_info(t_dir *dir_info, struct stat stat,
+				uint16_t flags)
 {
 	struct passwd	*usr;
 	struct group	*grp;
@@ -60,11 +61,11 @@ void			ft_get_other_info(t_dir *dir_info, struct stat stat)
 	dir_info->major = ft_itoa(major(stat.st_rdev));
 	dir_info->minor = ft_itoa(minor(stat.st_rdev));
 	dir_info->link = ft_itoa(stat.st_nlink);
-	if (usr != NULL)
+	if (usr != NULL && (flags & FLAG_N) == FALSE)
 		dir_info->uid = ft_strdup(usr->pw_name);
 	else
 		dir_info->uid = ft_itoa(stat.st_uid);
-	if (grp != NULL)
+	if (grp != NULL && (flags & FLAG_N) == FALSE)
 		dir_info->gid = ft_strdup(grp->gr_name);
 	else
 		dir_info->gid = ft_itoa(stat.st_gid);
@@ -91,6 +92,6 @@ int				ft_get_dir_info(char *path, char *name, t_dir *dir_info,
 	}
 	ft_get_main_info(dir_info, name, path, stat);
 	if (flags & FLAG_L)
-		ft_get_other_info(dir_info, stat);
+		ft_get_other_info(dir_info, stat, flags);
 	return (SUCCESS);
 }

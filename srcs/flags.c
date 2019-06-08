@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:10 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/08 14:22:50 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/08 14:56:42 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static uint16_t	ft_check_flag(char c, uint16_t flags)
 		flags &= ~FLAG_L;
 		return (flags |= FLAG_1);
 	}
+	else if (c == 'n')
+		return (flags |= FLAG_N);
 	else
 		return (FALSE);
 }
@@ -45,7 +47,7 @@ static void		ft_get_flags(char *arg, uint16_t *flags)
 		if (*flags == FALSE)
 		{
 			ft_printf("ft_ls: illegal option -- %c\n", *arg);
-			ft_putendl("usage: ft_ls [-GRadlrt1] [file ...]");
+			ft_putendl("usage: ft_ls [-GRadlnrt1] [file ...]");
 			exit(EXIT_FAILURE);
 		}
 		arg++;
