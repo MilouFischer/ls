@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:10 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/08 11:53:38 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/08 14:22:50 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static uint16_t	ft_check_flag(char c, uint16_t flags)
 {
-	if (c == 'l')
+	if (c == 'l' && (flags & FLAG_1) == FALSE)
 		return (flags |= FLAG_L);
 	else if (c == 'a')
 		return (flags |= FLAG_A);
@@ -29,7 +29,10 @@ static uint16_t	ft_check_flag(char c, uint16_t flags)
 	else if (c == 'd')
 		return (flags |= FLAG_D);
 	else if (c == '1')
+	{
+		flags &= ~FLAG_L;
 		return (flags |= FLAG_1);
+	}
 	else
 		return (FALSE);
 }

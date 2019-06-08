@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:28:16 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/07 16:17:12 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/08 14:36:54 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include "manage_input.h"
 # include "mode_time.h"
 # include "print_column.h"
+# include "ls_print.h"
 # include "sort_list.h"
 # include "util.h"
 
