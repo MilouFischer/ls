@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:28:16 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/08 14:53:59 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/08 15:01:24 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define FLAG_D			0x040
 # define FLAG_1			0x080
 # define FLAG_N			0x100
+# define FLAG_S			0x200
 
 # define OTH_X			0x001
 # define OTH_W			0x002

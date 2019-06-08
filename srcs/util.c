@@ -6,11 +6,22 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:39 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/08 14:32:33 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/08 15:09:20 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "util.h"
+
+void		ft_sort(t_list **lst, uint16_t flags)
+{
+	ft_merge_sort(lst, &ft_sort_name);
+	if ((flags & FLAG_S) == FLAG_S)
+		ft_merge_sort(lst, &ft_sort_size);
+	else if ((flags & FLAG_T) == FLAG_T)
+		ft_merge_sort(lst, &ft_sort_time);
+	if ((flags & FLAG_REV) == FLAG_REV)
+		ft_merge_sort(lst, &ft_sort_rev);
+}
 
 void		ft_format_s_link(t_dir *dir_info)
 {
