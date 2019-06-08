@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:52:07 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/06 15:54:57 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/08 13:15:17 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "ft_ls.h"
 
-void	ft_format_s_link(t_dir *dir_info);
 void	ft_get_padding(t_padding *padding, t_dir *dir_info);
 void	ft_get_main_info(t_dir *dir_info, char *name, char *path,
 				struct stat stat);

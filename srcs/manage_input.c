@@ -6,7 +6,7 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:25 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/08 12:17:08 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/08 13:12:22 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		ft_check_dir(t_list **lst_dir, t_list **lst_file, char *arg,
 	void		*dir;
 	char		*tmp;
 
-	dir  = opendir(arg);
+	dir = opendir(arg);
 	if (dir == NULL)
 	{
 		if (errno == ENOTDIR)

@@ -6,25 +6,11 @@
 /*   By: efischer <efischer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:29:21 by efischer          #+#    #+#             */
-/*   Updated: 2019/06/08 11:39:56 by efischer         ###   ########.fr       */
+/*   Updated: 2019/06/08 13:15:24 by efischer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_dir_info.h"
-
-void			ft_format_s_link(t_dir *dir_info)
-{
-	char			buf[PATH_MAX];
-	ssize_t			ret;
-
-	if ((ret = readlink(dir_info->path, buf, PATH_MAX)) == FAILURE)
-		perror("readlink");
-	else
-	{
-		buf[ret] = '\0';
-		ft_printf(" -> %s", buf);
-	}
-}
 
 static void		ft_max_padding(char *str, size_t *data)
 {
@@ -45,11 +31,13 @@ void			ft_get_padding(t_padding *padding, t_dir *dir_info)
 	ft_max_padding(dir_info->major, &padding->major);
 	ft_max_padding(dir_info->minor, &padding->minor);
 	padding->total += dir_info->nb_blocks;
-	if ((dir_info->type == 'c' || dir_info->type == 'b') && padding->size <= padding->major + padding->minor + 1)
+	if ((dir_info->type == 'c' || dir_info->type == 'b')
+			&& padding->size <= padding->major + padding->minor + 1)
 		padding->size = padding->major + padding->minor + 2;
 }
 
-void			ft_get_main_info(t_dir *dir_info, char *name, char *path, struct stat stat)
+void			ft_get_main_info(t_dir *dir_info, char *name, char *path,
+				struct stat stat)
 {
 	dir_info->name = ft_strdup(name);
 	dir_info->path = path;
